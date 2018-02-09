@@ -4,16 +4,25 @@
 # In[ ]:
 import elasticsearch
 from elasticsearch import Elasticsearch
+from elasticsearch.helpers import bulk
 
 class ElasticSearchClass(object):
  
-    def __init__(self, host, port):
+    def __init__(self, host, port, user=None, pwd=None):
         self.host = host
         self.port = port
-        self.connect()
+        if user is not None and pwd is not None:
+            self.es = Elasticsearch(hosts=[{'host': self.host, 'port': self.port}], http_auth=(user, pwd))
+        else:
+            self.es = Elasticsearch(hosts=[{'host': self.host, 'port': self.port}])
+        
  
-    def connect(self):
-        self.es = Elasticsearch(hosts=[{'host': self.host, 'port': self.port}])
+    def isValid(self):
+        try:
+            self.es.ping()
+            return True
+        except:
+            return False
  
     def count(self, indexName):
         """
@@ -47,12 +56,17 @@ class ElasticSearchClass(object):
             pass
         self.es.indices.create(index = indexName, body = body)
         
-    def indexDocument(self, indexName, docType, id, body):
-        try:
-            self.es.index(index = indexName, doc_type = docType, id = id,
+    def indexDocument(self, indexName, docType, body, docId=None):
+        if docId is not None:
+            self.es.index(index = indexName, doc_type = docType, id = docId,
                      body = body)
-        except Exception as e:
-            print(e)
+        else:
+            self.es.index(index = indexName, doc_type = docType, body = body)
+            
+    #https://github.com/elastic/elasticsearch-py/issues/508
+    def bulkIndexDocument(self, actions):
+        success, _ = bulk(self.es, actions)
+        return success
             
     def moreLikeThis(self, indexName, docType, id, mltFields, search_size=2, min_term_freq=1, min_doc_freq=1):
         return self.es.search(body={"size":search_size,
@@ -82,4 +96,3 @@ class ElasticSearchClass(object):
                 }
                 ]})
           '''
-
