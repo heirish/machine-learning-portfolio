@@ -5,7 +5,7 @@ from sklearn.datasets import fetch_20newsgroups
 from Models import ElasticSearchClass
 
 
-def iterLoadStackoverflowFromES(maxCount=10000):
+def iterLoadStackoverflowFromES(maxCount=-1):
     esUtil = ElasticSearchClass.ElasticSearchClass("192.168.18.187", 9201)
     dsl = '''
     {
@@ -26,7 +26,7 @@ def iterLoadStackoverflowFromES(maxCount=10000):
     for doc in res:
         #if chooseUtil.choose() == False:
             #continue
-        if count >= maxCount:
+        if maxCount > 0 and count >= maxCount:
             break
         count += 1
         data.append([doc['_id'], doc['_source']['body']])
