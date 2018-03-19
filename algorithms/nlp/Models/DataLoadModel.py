@@ -3,7 +3,37 @@
 # In[ ]:
 from sklearn.datasets import fetch_20newsgroups
 from Models import ElasticSearchClass
+import xml.etree.ElementTree as ET
 
+def loadStackoverflowFromXML(XMLFile, maxCount = -1):
+    context = ET.iterparse(XMLFile, events=("start", "end"))
+    #turn it into an iterator
+    context = iter(context)
+    #get the root element
+    event, root = next(context)
+    count = 0 
+    data = []
+    for event, elem in context:
+        if maxCount > 0 and count > maxCount:
+            break
+        if event == "end" and elem.tag == "row":
+            values=dict()
+            for key in elem.attrib.keys():
+                if key.lower() == "body" or key.lower() == "posttypeid":
+                    values[key.lower()] = elem.attrib.get(key)
+                elif key.lower() == "id": # change field name to docID
+                    values["docId"] = elem.attrib.get(key)
+                else:
+                    #values[key.lower()] = elem.attrib.get(key)
+                    continue
+            elem.clear()
+            if values["posttypeid"] != "1": #only retrive questions
+                continue
+            count += 1
+            data.append(values)
+        root.clear()
+    print("Parse XML [%s]Done, total [%d] records!" % (XMLFile, count))
+    return data
 
 def iterLoadStackoverflowFromES(maxCount=10000):
     esUtil = ElasticSearchClass.ElasticSearchClass("192.168.18.187", 9201)
