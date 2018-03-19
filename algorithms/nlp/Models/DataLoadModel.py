@@ -30,7 +30,7 @@ def loadStackoverflowFromXML(XMLFile, maxCount = -1):
             if values["posttypeid"] != "1": #only retrive questions
                 continue
             count += 1
-            data.append(values)
+            data.append([values["docId"], values["body"]])
         root.clear()
     print("Parse XML [%s]Done, total [%d] records!" % (XMLFile, count))
     return data
