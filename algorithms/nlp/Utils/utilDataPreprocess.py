@@ -80,6 +80,14 @@ def tokenizeText(sentence):
         tokens.remove("\n\n")
     return tokens
 
+def countvectorizeData(data, min_df=5, max_df = 0.6, max_features=None):
+    start_time = time.time()
+    vectorizer = CountVectorizer(tokenizer = tokenizeText, min_df=min_df, max_df = max_df, max_features=max_features)
+    vectorized_data = vectorizer.fit_transform(data)
+    end_time = time.time()
+    print("vectorize done in {} Seconds".format(end_time - start_time))
+    return vectorized_data, vectorizer
+
 ##########Create preprocess pipline and run
 def preProcessData(X_train, n_jobs=1, max_features=None):
     #create vectorizer object to generate feature vectors, we will use custom spacy’s tokenizer
@@ -88,9 +96,10 @@ def preProcessData(X_train, n_jobs=1, max_features=None):
     #normalizer = Normalizer(copy=False)
     #removed any word that appeared in more than 70% of documents.
     #removed any word that appeared in less than 5 documents
+    cleaner = CleanTextTransformer(n_jobs=n_jobs)
     vectorizer = CountVectorizer(tokenizer = tokenizeText, min_df=5, max_df = 0.6, max_features=max_features)
     start_time = time.time()
-    pipe_preprocess = Pipeline([("cleaner", CleanTextTransformer(n_jobs=n_jobs)),
+    pipe_preprocess = Pipeline([("cleaner", cleaner),
                  ("vectorizer", vectorizer)])
     X_train_preprocess = pipe_preprocess.fit_transform(X_train)
     end_time = time.time()
