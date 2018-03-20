@@ -2,6 +2,7 @@
 
 # In[ ]:
 import socket
+import dill #for pickle  object with lambdas
 import pickle
 
 def getIP():
@@ -16,4 +17,14 @@ def pickleDump(filename, obj):
         
 def pickleLoad(filename):
     #load the content
-    return pickle.load(open(filename, "rb" ) )
+    with open(filename, "rb") as handle:
+        return pickle.load(handle)
+    
+def dillDump(filename, obj):
+    with open(filename, 'wb') as handle:
+        dill.dump(obj, handle)
+        
+def dillLoad(filename):
+    #load the content
+    with open(filename, "rb") as handle:
+        return dill.load(handle)
