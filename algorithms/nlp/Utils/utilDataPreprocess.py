@@ -61,26 +61,31 @@ def cleanText(text):
 #these can also be replaced by word vectors 
 # List of symbols we don't care about
 punctuations = " ".join(string.punctuation).split(" ") + ["-----", "---", "...", "“", "”", "'ve", "--", "//", "div"]
-parser = spacy.load('en')
+#https://spacy.io/usage/processing-pipelines
+#https://github.com/explosion/spaCy/issues/1837
+parser = spacy.load('en', disable=['parser', 'ner'])
 def tokenizeText(sentence):
-    tokens = parser(sentence)
-    #only keep nouns
-    tokens = [tok for tok in tokens if (tok.tag_ in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
-    tokens = [tok.lemma_.lower().strip() if tok.lemma_ != "-PRON-" else tok.lower_ for tok in tokens]
-    tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations)]
-    #remove tokens lenth is 1
-    tokens = [tok for tok in tokens if (len(tok)>1)]
-    # remove large strings of whitespace
-    while "" in tokens:
-        tokens.remove("")
-    while " " in tokens:
-        tokens.remove(" ")
-    while "\n" in tokens:
-        tokens.remove("\n")
-    while "\n\n" in tokens:
-        tokens.remove("\n\n")
+    try:
+        tokens = parser(sentence)
+        #only keep nouns
+        tokens = [tok for tok in tokens if (tok.tag_ in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
+        tokens = [tok.lemma_.lower().strip() if tok.lemma_ != "-PRON-" else tok.lower_ for tok in tokens]
+        tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations)]
+        #remove tokens lenth is 1
+        tokens = [tok for tok in tokens if (len(tok)>1)]
+        # remove large strings of whitespace
+        while "" in tokens:
+            tokens.remove("")
+        while " " in tokens:
+            tokens.remove(" ")
+        while "\n" in tokens:
+            tokens.remove("\n")
+        while "\n\n" in tokens:
+            tokens.remove("\n\n")
+    except Exception as e:
+        print(e)
+        tokens=""
     return tokens
-
 
 #https://stackoverflow.com/questions/35867484/pass-tokens-to-countvectorizer
 def countvectorizeDataWithTokens(data, min_df=1, max_df = 1.0, max_features=None):
