@@ -5,11 +5,13 @@ import pyLDAvis
 import pyLDAvis.sklearn
 import numpy as np
 
-def trainLDA(data, n_topics = 10):
-    lda = LatentDirichletAllocation(n_topics=n_topics, max_iter=100,
+def trainLDA(data, n_topics = 10, max_iter=100, batch_size=64, n_jobs=-1):
+    lda = LatentDirichletAllocation(n_topics=n_topics, n_jobs=n_jobs,
+                                max_iter=max_iter,
                                 learning_method='online',
-                                batch_size=20,
+                                batch_size=batch_size,
                                 random_state=125)
+
     lda.fit(data)
     return lda
 
