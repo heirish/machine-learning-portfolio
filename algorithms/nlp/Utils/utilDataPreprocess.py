@@ -53,6 +53,8 @@ def cleanText(text):
     text = re.sub("@mention", '', text).strip()
     # delete numbers
     text = re.sub(r'\w*\d\w*', '', text).strip()
+    # delete unicode, or multiprocessing.map will raise encodeerror
+    text = text.encode("utf-8", "ignore").decode()
     return text
 
 ############create tokenizer
@@ -84,7 +86,8 @@ def tokenizeText(sentence):
             tokens.remove("\n\n")
     except Exception as e:
         print(e)
-        tokens=""
+        print(sentence)
+        tokens=[]
     return tokens
 
 #https://stackoverflow.com/questions/35867484/pass-tokens-to-countvectorizer
