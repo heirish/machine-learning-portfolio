@@ -15,12 +15,13 @@ def trainLDA(data, n_topics = 10, max_iter=100, batch_size=64, n_jobs=-1):
     lda.fit(data)
     return lda
 
-def print_top_words(model, feature_names, n_top_words):
+def get_top_words(model, feature_names, n_top_words):
+    topic_list=[]
     for topic_idx, topic in enumerate(model.components_):
-        print("Topic #%d:" % topic_idx)
-        print(" ".join([feature_names[i]
-                        for i in topic.argsort()[:-n_top_words - 1:-1]]))
-    print()
+        top_words=" ".join([feature_names[i]
+                        for i in topic.argsort()[:-n_top_words - 1:-1]])
+        topic_list.append([topic_idx, top_words])
+    return topic_list
     
 ##visualize doc_topic_distr
 #https://de.dariah.eu/tatom/topic_model_visualization.html

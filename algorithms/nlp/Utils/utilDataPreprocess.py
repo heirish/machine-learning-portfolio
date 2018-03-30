@@ -62,7 +62,7 @@ def cleanText(text):
 #Create spacy tokenizer that parses a sentence and generates tokens
 #these can also be replaced by word vectors 
 # List of symbols we don't care about
-punctuations = " ".join(string.punctuation).split(" ") + ["-----", "---", "...", "“", "”", "'ve", "--", "//", "div"]
+punctuations = " ".join(string.punctuation).split(" ") + ["-----", "---", "...", "“", "”", "'ve", "--", "//", "div", ":", ":\"", "|"]
 #https://spacy.io/usage/processing-pipelines
 #https://github.com/explosion/spaCy/issues/1837
 parser = spacy.load('en', disable=['parser', 'ner'])

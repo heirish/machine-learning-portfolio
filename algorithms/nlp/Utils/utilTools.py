@@ -28,3 +28,29 @@ def dillLoad(filename):
     #load the content
     with open(filename, "rb") as handle:
         return dill.load(handle)
+    
+def formatOneTextRow(fields, values = None, fieldDLM="|@|"):
+    """
+    Parameters in:
+        fields - a list of fields name
+        values - a dictionary of values with fields name, Default None
+        fieldDLM - delimeter of values, default "|@|"
+    Return:
+        if values is None, return fields with delimeters, used as header
+        if is not None, values with delimeters in the same order as fields
+    """
+    #format a header
+    if values is None:
+        return fieldDLM.join(fields)
+    
+    #format a data row
+    valueList = []
+    for field in fields:
+        if field in values:
+            if field == "tags":
+                valueList.append(",".join(values[field]))
+            else:
+                valueList.append(values[field])
+        else: 
+            valueList.append("")
+    return fieldDLM.join(valueList)
