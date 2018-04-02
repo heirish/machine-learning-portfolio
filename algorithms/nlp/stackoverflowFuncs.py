@@ -16,6 +16,7 @@ FIELDNAME_BODY = "body"
 FIELDNAME_POSTTYPE = "posttypeid"
 FIELDNAME_ANSWERCOUNT = "answercount"
 FIELDNAME_ACCEPTEDANSWER = "acceptedanswerid"
+FIELDNAME_TAGS = "tags"
 FIELDNAME_ID = "docID"
 
 """
@@ -30,7 +31,7 @@ IDFILE="F:\stackoverflow.com-Posts\pkl\idlist_cleaned.pkl"
 DATAFILE_CLEANED="F:\stackoverflow.com-Posts\pkl\preprocessed_data_cleaned.pkl"
 DATAFILE_TOKENIZED="F:\stackoverflow.com-Posts\pkl\preprocessed_data_tokenized.pkl"
 DATAFILE_VECTORIZED="F:\stackoverflow.com-Posts\pkl\preprocessed_data_vectorized.pkl"
-VECTORIZERFILE = "F:\stackoverflow.com-Posts\pkl\\vectorizer.pkl"
+VECTORIZERFILE = "F:\stackoverflow.com-Posts\pkl\vectorizer.pkl"
 
 
 punctuations = " ".join(string.punctuation).split(" ") + ["-----", "---", "...", "“", "”", "'ve", "--", "//", "div"]
@@ -43,7 +44,8 @@ def parseXMLAndFilterFunc(event, elem):
             if key.lower() == FIELDNAME_BODY \
                 or key.lower() == FIELDNAME_POSTTYPE \
                 or key.lower() == FIELDNAME_ANSWERCOUNT \
-                or key.lower() == FIELDNAME_ACCEPTEDANSWER:
+                or key.lower() == FIELDNAME_ACCEPTEDANSWER \
+                or key.lower() == FIELDNAME_TAGS:
                 values[key.lower()] = elem.attrib.get(key)
             elif key.lower() == "id": # change field name to docID
                 values[FIELDNAME_ID] = elem.attrib.get(key)
@@ -57,12 +59,15 @@ def parseXMLAndFilterFunc(event, elem):
             
         answercount = 0
         acceptedanswer = ""
+        tags = ""
         if FIELDNAME_ANSWERCOUNT in values and values[FIELDNAME_ANSWERCOUNT].isdecimal():
             answercount = int(values[FIELDNAME_ANSWERCOUNT])
         if FIELDNAME_ACCEPTEDANSWER in values:
             acceptedanswer = values[FIELDNAME_ACCEPTEDANSWER].strip()
+        if FIELDNAME_TAGS in values:
+            tags = values[FIELDNAME_TAGS].strip()
                 
-        if answercount == 0 or acceptedanswer == "":
+        if answercount == 0 or acceptedanswer == "" or "git" in tags:
             return None
             
         return [values[FIELDNAME_ID], values[FIELDNAME_BODY]]
@@ -131,11 +136,11 @@ def tokenInChunks(data_in, n_jobs=1, n_chunks=1):
             end_time = time.time()
             print("tokenized {} records in {} seconds".format(chunk_size*(i+1), end_time - start_time))
             tokenized_data.extend(tokenized_data_tmp) 
-        try:
-            utilTools.pickleDump(DATAFILE_TOKENIZED+str(i), tokenized_data_tmp)
-        except Exception as e:
-            print(e)
-            print("pickleDump tokenized data Failed")
+            try:
+                utilTools.pickleDump(DATAFILE_TOKENIZED+str(i), tokenized_data_tmp)
+            except Exception as e:
+                print(e)
+                print("pickleDump tokenized data Failed")
         pool.close()
         pool.join()
     else:
@@ -144,11 +149,11 @@ def tokenInChunks(data_in, n_jobs=1, n_chunks=1):
             end_time = time.time()
             print("tokenized {} records in {} seconds".format(chunk_size*(i+1), end_time - start_time))
             tokenized_data.extend(tokenized_data_tmp) 
-        try:
-            utilTools.pickleDump(DATAFILE_TOKENIZED+str(i), tokenized_data_tmp)
-        except Exception as e:
-            print(e)
-            print("pickleDump tokenized data Failed")
+            try:
+                utilTools.pickleDump(DATAFILE_TOKENIZED+str(i), tokenized_data_tmp)
+            except Exception as e:
+                print(e)
+                print("pickleDump tokenized data Failed")
     return tokenized_data
     
 def saveCleanedData(idlist, data):
@@ -182,7 +187,7 @@ def loadChunkedTokenizedData(n_chunks=1):
     except Exception as e:
         print(e)
         print("loadChunkedTokenizedData failed")
-        return None
+        raise e
     
 def saveVectorizedData(data, vectorizer):
     try:
