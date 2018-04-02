@@ -8,14 +8,8 @@ from elasticsearch import helpers
 
 class ElasticSearchClass(object):
  
-    def __init__(self, host, port, user=None, pwd=None):
-        self.host = host
-        self.port = port
-        if user is not None and pwd is not None:
-            self.es = Elasticsearch(hosts=[{'host': self.host, 'port': self.port}], http_auth=(user, pwd))
-        else:
-            self.es = Elasticsearch(hosts=[{'host': self.host, 'port': self.port}])
-        
+    def __init__(self, hosts):
+        self.es = Elasticsearch(hosts=hosts)
  
     def isValid(self):
         try:

@@ -5,7 +5,7 @@ from sklearn.datasets import fetch_20newsgroups
 from Models import ElasticSearchClass
 import xml.etree.ElementTree as ET
 
-def loadStackoverflowFromXML(XMLFile, maxCount = -1):
+def loadStackoverflowFromXML(XMLFile, dataformatFunc, maxCount = -1):
     context = ET.iterparse(XMLFile, events=("start", "end"))
     #turn it into an iterator
     context = iter(context)
@@ -17,25 +17,16 @@ def loadStackoverflowFromXML(XMLFile, maxCount = -1):
         if maxCount > 0 and count > maxCount:
             break
         if event == "end" and elem.tag == "row":
-            values=dict()
-            for key in elem.attrib.keys():
-                if key.lower() == "body" or key.lower() == "posttypeid":
-                    values[key.lower()] = elem.attrib.get(key)
-                elif key.lower() == "id": # change field name to docID
-                    values["docId"] = elem.attrib.get(key)
-                else:
-                    #values[key.lower()] = elem.attrib.get(key)
-                    continue
+            values = dataformatFunc(event, elem)
             elem.clear()
-            if values["posttypeid"] != "1": #only retrive questions
-                continue
-            count += 1
-            data.append([values["docId"], values["body"]])
+            if values is not None:
+                data.append(values)
+                count += 1
         root.clear()
     print("Parse XML [%s]Done, total [%d] records!" % (XMLFile, count))
     return data
 
-def iterLoadStackoverflowFromES(maxCount=-1):
+def iterLoadStackoverflowFromES(maxCount=10000):
     esUtil = ElasticSearchClass.ElasticSearchClass("192.168.18.187", 9201)
     dsl = '''
     {

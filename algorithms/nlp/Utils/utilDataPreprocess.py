@@ -1,129 +1,123 @@
 from joblib import Parallel, delayed
 import multiprocessing
 import spacy
-from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import CountVectorizer 
 from sklearn.pipeline import Pipeline
 from sklearn.base import TransformerMixin 
 from sklearn.feature_extraction.stop_words import ENGLISH_STOP_WORDS as stopwords 
-import re
 import string
 import time
 
 ###########create data clearner
-    
-#Custom transformer using spaCy 
+     
 class CleanTextTransformer(TransformerMixin):
-    def __init__(self, n_jobs=1):
+    def __init__(self, n_jobs=1, cleanFunc=None):
         self.n_jobs=n_jobs
+        if cleanFunc is None:
+            self.cleanFunc = self.defaultClean
+        else:
+            self.cleanFunc = cleanFunc
+            
     def transform(self, X, **transform_params):
         if self.n_jobs > 1:
             #return Parallel(n_jobs=self.n_jobs)(delayed(cleanText)(txt) for txt in X)
             pool = multiprocessing.Pool(processes=self.n_jobs)
-            results = pool.map(cleanText, X)
-            #results = pool.starmap(cleanText, zip(X.keys(), X.values()))
+            results = pool.map(self.cleanFunc, X)
             pool.close()
             pool.join()
             return results
         else:
-            return [cleanText(txt) for txt in X]
+            return [self.cleanFunc(txt) for txt in X]
+        
     def fit(self, X, y=None, **fit_params):
         return self
+    
     def get_params(self, deep=True):
         return {}
 
-# A custom function to clean the text before sending it into the vectorizer
-def cleanText(text):
-   #some data will raise NotImplementedError: subclasses of ParserBase must override error()
-    try:
-        bs = BeautifulSoup(text, "html.parser")
-        #code = [s.extract() for s in bs('code')]
-        # replace other HTML symbols
-        text = bs.get_text()
-    except Exception as e:
-        #print(e)
-        pass
-    text = text.lower()
-    # get rid of newlines
-    text = text.strip().replace("\n", " ").replace("\r", " ")
-    # replace @xxxx with @mentions
-    mentionFinder = re.compile(r"@[a-z0-9_]{1,15}", re.IGNORECASE)
-    text = mentionFinder.sub("@mention", text)
-    # here we don't need @mention
-    text = re.sub("@mention", '', text).strip()
-    # delete numbers
-    text = re.sub(r'\w*\d\w*', '', text).strip()
-    # delete unicode, or multiprocessing.map will raise encodeerror
-    text = text.encode("utf-8", "ignore").decode()
-    return text
+    # A custom function to clean the text before sending it into the vectorizer
+    def defaultClean(self,text):
+        text = text.lower()
+        # get rid of newlines
+        text = text.strip().replace("\n", " ").replace("\r", " ")
+        # delete unicode, or multiprocessing.map will raise encodeerror
+        text = text.encode("utf-8", "ignore").decode()
+        return text
+
 
 ############create tokenizer
+punctuations = " ".join(string.punctuation).split(" ")
+parser = spacy.load('en', disable=['parser', 'ner'])
+#Custom transformer using spaCy
+class VectorizationTransformer(TransformerMixin):
+    def __init__(self, n_token_jobs=1, n_token_chunks =1, tokenFunc=None, vectorizer = None):
+        self.n_token_jobs = n_token_jobs
+        self.n_token_chunks = n_token_chunks
+        self.tokenFunc = tokenFunc
+            
+        if vectorizer is None:
+            #https://stackoverflow.com/questions/35867484/pass-tokens-to-countvectorizer
+            self.vectorizer = CountVectorizer(
+                # so we can pass it strings
+                input='content',
+                # turn off preprocessing of strings to avoid corrupting our keys
+                lowercase=False,
+                preprocessor=lambda x: x,
+                # use our token dictionary
+                tokenizer=lambda x:x)
+        else:
+            self.vectorizer = vectorizer
+            
+    def transform(self, X, **transform_params):
+        if self.tokenFunc is not None:
+            tokenized_data = self.tokenFunc(X, self.n_token_jobs, self.n_token_chunks)
+        else:
+            tokenized_data = X
+        vectorized_data = self.vectorizer.fit_transform(tokenized_data)
+        return tokenized_data, vectorized_data, self.vectorizer
+    
+    def fit(self, X, y=None, **fit_params):
+        return self
+    
+    def get_params(self, deep=True):
+        return {}
+    
+    def defaultTokenFunc(self, X, n_token_jobs, n_token_chunks):
+        tokenized_data = []
+        chunk_size = int(math.ceil(len(X) / n_token_chunks))
+        if n_token_jobs>1:
+            pool = multiprocessing.Pool(n_token_jobs)
+            for i in range(n_token_chunks):
+                tokenized_data_tmp = pool.map(defaultTokenizer, X[chunk_size*i:chunk_size*(i+1)])
+                tokenized_data.extend(tokenized_data_tmp)
+            pool.close()
+            pool.join()
+        else:
+            for i in range(n_token_chunks):
+                tokenized_data_tmp = [self.defaultTokenizer(x) for x in X[chunk_size*i:chunk_size*(i+1)]]
+                tokenized_data.extend(tokenized_data_tmp)
+        return tokenized_data
 
 #Create spacy tokenizer that parses a sentence and generates tokens
 #these can also be replaced by word vectors 
 # List of symbols we don't care about
-punctuations = " ".join(string.punctuation).split(" ") + ["-----", "---", "...", "“", "”", "'ve", "--", "//", "div", ":", ":\"", "|"]
-#https://spacy.io/usage/processing-pipelines
-#https://github.com/explosion/spaCy/issues/1837
-parser = spacy.load('en', disable=['parser', 'ner'])
-def tokenizeText(sentence):
-    try:
-        tokens = parser(sentence)
-        #only keep nouns
-        tokens = [tok for tok in tokens if (tok.tag_ in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
-        tokens = [tok.lemma_.lower().strip() if tok.lemma_ != "-PRON-" else tok.lower_ for tok in tokens]
-        tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations)]
-        #remove tokens lenth is 1
-        tokens = [tok for tok in tokens if (len(tok)>1)]
-        # remove large strings of whitespace
-        while "" in tokens:
-            tokens.remove("")
-        while " " in tokens:
-            tokens.remove(" ")
-        while "\n" in tokens:
-            tokens.remove("\n")
-        while "\n\n" in tokens:
-            tokens.remove("\n\n")
-    except Exception as e:
-        print(e)
-        print(sentence)
-        tokens=[]
+def defaultTokenizer(self,sentence):
+    tokens = parser(sentence)
+    tokens = [tok.lemma_.lower().strip() if tok.lemma_ != "-PRON-" else tok.lower_ for tok in tokens]
+    tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations)]
     return tokens
-
-#https://stackoverflow.com/questions/35867484/pass-tokens-to-countvectorizer
-def countvectorizeDataWithTokens(data, min_df=1, max_df = 1.0, max_features=None):
-    start_time = time.time()
-    vectorizer = CountVectorizer(
-      # so we can pass it strings
-      input='content',
-      # turn off preprocessing of strings to avoid corrupting our keys
-      lowercase=False,
-      preprocessor=lambda x: x,
-      # use our token dictionary
-      tokenizer=lambda x:x,
-      min_df=min_df, max_df = max_df, max_features=max_features)
-    vectorized_data = vectorizer.fit_transform(data)
-    end_time = time.time()
-    print("vectorize done in {} Seconds".format(end_time - start_time))
-    return vectorized_data, vectorizer
-
-def countvectorizeData(data, min_df=1, max_df = 1.0, max_features=None):
-    start_time = time.time()
-    vectorizer = CountVectorizer(tokenizer = tokenizeText, min_df=min_df, max_df = max_df, max_features=max_features)
-    vectorized_data = vectorizer.fit_transform(data)
-    end_time = time.time()
-    print("vectorize done in {} Seconds".format(end_time - start_time))
-    return vectorized_data, vectorizer
     
 ##########Create preprocess pipline and run
-def preProcessData(X_train, n_jobs=1, max_features=None):
+def preProcessData(X_train, n_jobs=1, max_features=None, tokenizer = None,):
     #create vectorizer object to generate feature vectors, we will use custom spacy’s tokenizer
     #vectorizer = TfidfVectorizer(tokenizer = tokenizeText)
     #svd = TruncatedSVD(2)
     #normalizer = Normalizer(copy=False)
     #removed any word that appeared in more than 70% of documents.
     #removed any word that appeared in less than 5 documents
-    vectorizer = CountVectorizer(tokenizer = tokenizeText, min_df=5, max_df = 0.6, max_features=max_features)
+    if tokenizer is None:
+        tokenizer = defaultTokenizer
+    vectorizer = CountVectorizer(tokenizer = tokenizer, min_df=5, max_df = 0.6, max_features=max_features)
     start_time = time.time()
     pipe_preprocess = Pipeline([("cleaner", CleanTextTransformer(n_jobs=n_jobs)),
                  ("vectorizer", vectorizer)])
