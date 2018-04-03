@@ -2,6 +2,8 @@
 
 # In[ ]:
 import datefinder
+import importlib
+importlib.reload(datefinder)
 import re
 import ipaddress
 from urllib.parse import urlparse
@@ -54,10 +56,12 @@ parser = spacy.load('en', disable=['parser', 'ner'])
 def formatTypeName(typeName):
     return "{}".format(typeName)
 
+#########Caution:this will identify man numbers to wrong datetime
+###seems set strict to True when call extract_date_string can resolve that prob
 def identifyDatetime(text, typeName="DATETIME_TYPE"):
     finder = datefinder.DateFinder()
     #print(finder.DATES_PATTERN)
-    finds = finder.extract_date_strings(text)
+    finds = finder.extract_date_strings(text, strict=True)
     for date_string, indices, captures in finds:
         #print(date_string)
         #print(indices)
@@ -135,3 +139,12 @@ def identifyNumber(text, typeName="NUM_TYPE"):
         return replaced_text
     
     return text
+
+def isJavaStackTrace(text):
+    #if re.search(r"Caused by:.*", text) \
+        #and 
+    if re.search(r"at.*\(.*.java:\d+\)", text):
+        return True
+    else:
+        return False
+    
