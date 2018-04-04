@@ -31,7 +31,7 @@ IDFILE="F:\stackoverflow.com-Posts\pkl\idlist_cleaned.pkl"
 DATAFILE_CLEANED="F:\stackoverflow.com-Posts\pkl\preprocessed_data_cleaned.pkl"
 DATAFILE_TOKENIZED="F:\stackoverflow.com-Posts\pkl\preprocessed_data_tokenized.pkl"
 DATAFILE_VECTORIZED="F:\stackoverflow.com-Posts\pkl\preprocessed_data_vectorized.pkl"
-VECTORIZERFILE = "F:\stackoverflow.com-Posts\pkl\vectorizer.pkl"
+VECTORIZERFILE = "F:\stackoverflow.com-Posts\pkl\preprocessed_vectorizer.pkl"
 
 
 punctuations = " ".join(string.punctuation).split(" ") + ["-----", "---", "...", "“", "”", "'ve", "--", "//", "div"]
@@ -106,8 +106,10 @@ def tokenFunc(sentence):
         tokens = [tok for tok in tokens if (tok.tag_ in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
         tokens = [tok.lemma_.lower().strip() if tok.lemma_ != "-PRON-" else tok.lower_ for tok in tokens]
         tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations)]
-        #remove tokens lenth is 1
-        tokens = [tok for tok in tokens if (len(tok)>1)]
+        #remove tokens length is 1
+        #remove tokens length larger than 32
+        #https://en.wikipedia.org/wiki/Longest_word_in_English#Technical_terms
+        tokens = [tok for tok in tokens if (len(tok)>1 and len(tok)<33)]
         # remove large strings of whitespace
         while "" in tokens:
             tokens.remove("")

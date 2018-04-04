@@ -140,11 +140,34 @@ def identifyNumber(text, typeName="NUM_TYPE"):
     
     return text
 
+def identifySQLSelect(text, typeName="SQLSELECT_TYPE"):
+    replaced_text = ""
+    last_index = 0
+    for match in re.finditer(r"(?i)select\s.*from\s.*(where)?.*(and|or)?.*[,|.|;|]", text):
+        matched_sql = match.group()
+        replaced_text += text[last_index:match.start()] + formatTypeName(typeName)
+        last_index = match.end()-1
+    
+    if last_index > 0:
+        replaced_text += text[last_index:]
+        
+    if len(replaced_text) > 0:
+        return replaced_text
+    
+    return text
+    
 def isJavaStackTrace(text):
     #if re.search(r"Caused by:.*", text) \
         #and 
-    if re.search(r"at.*\(.*.java:\d+\)", text):
+    if re.search(r"(?i)(at)?.*\(.*.java:\d+\)", text):
         return True
     else:
         return False
-    
+
+def isJSStackTrace(text):
+    #if re.search(r"Caused by:.*", text) \
+        #and 
+    if re.search(r"(?i)(at)?.*\(.*.js:\d+\)", text):
+        return True
+    else:
+        return False
