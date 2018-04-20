@@ -7,6 +7,8 @@ import math
 import multiprocessing
 import time
 from bs4 import BeautifulSoup
+from zhon import hanzi #for CJK punctuations
+
 
 from Utils import utilTools
 import importlib
@@ -18,6 +20,12 @@ FIELDNAME_ANSWERCOUNT = "answercount"
 FIELDNAME_ACCEPTEDANSWER = "acceptedanswerid"
 FIELDNAME_TAGS = "tags"
 FIELDNAME_ID = "docID"
+EXCLUDE_TAGS = ["git","svn",
+           "sql", "regex","exception", "css", "html", "python", "c#",
+           "ide", "visual-studio", "android-studio", "intellij", "xcode", "pycharm", "eclipse", "webstorm", "netbeans","delphi"
+           "gcc", "g++", "cmake", "maven", "gradle",
+           "excel", "word", "powerpoint", "outlook", "pdf", "notepad","notepad++", "vim", "vi", "emacs", "sublime"
+           ]
 
 """
 IDFILE="./1.pkl"
@@ -33,8 +41,7 @@ DATAFILE_TOKENIZED="F:\stackoverflow.com-Posts\pkl\preprocessed_data_tokenized.p
 DATAFILE_VECTORIZED="F:\stackoverflow.com-Posts\pkl\preprocessed_data_vectorized.pkl"
 VECTORIZERFILE = "F:\stackoverflow.com-Posts\pkl\preprocessed_vectorizer.pkl"
 
-
-punctuations = " ".join(string.punctuation).split(" ") + ["-----", "---", "...", "“", "”", "'ve", "--", "//", "div"]
+punctuations = " ".join(string.punctuation).split(" ") + " ".join(hanzi.punctuation).split(" ")
 parser = spacy.load('en', disable=['parser', 'ner'])
 
 def parseXMLAndFilterFunc(event, elem):
@@ -59,15 +66,18 @@ def parseXMLAndFilterFunc(event, elem):
             
         answercount = 0
         acceptedanswer = ""
-        tags = ""
+        tags = []
         if FIELDNAME_ANSWERCOUNT in values and values[FIELDNAME_ANSWERCOUNT].isdecimal():
             answercount = int(values[FIELDNAME_ANSWERCOUNT])
         if FIELDNAME_ACCEPTEDANSWER in values:
             acceptedanswer = values[FIELDNAME_ACCEPTEDANSWER].strip()
         if FIELDNAME_TAGS in values:
-            tags = values[FIELDNAME_TAGS].strip()
+            tags = re.split("[<>]", values[FIELDNAME_TAGS].strip().lower())
+            for exclude_tag in EXCLUDE_TAGS:
+                if exclude_tag in tags:
+                    return None
                 
-        if answercount == 0 or acceptedanswer == "" or "git" in tags:
+        if answercount == 0 or acceptedanswer == "":
             return None
             
         return [values[FIELDNAME_ID], values[FIELDNAME_BODY]]
