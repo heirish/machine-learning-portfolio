@@ -21,8 +21,8 @@ FIELDNAME_ACCEPTEDANSWER = "acceptedanswerid"
 FIELDNAME_TAGS = "tags"
 FIELDNAME_ID = "docID"
 EXCLUDE_TAGS = ["git","svn",
-           "sql", "regex","exception", "css", "html", "python", "c#",
-           "ide", "visual-studio", "android-studio", "intellij", "xcode", "pycharm", "eclipse", "webstorm", "netbeans","delphi"
+           "sql", "regex","exception", "css", "html", "python", "c#", "asp.net",
+           "ide", "visual-studio", "android-studio", "intellij", "xcode", "pycharm", "eclipse", "webstorm", "netbeans","delphi",
            "gcc", "g++", "cmake", "maven", "gradle",
            "excel", "word", "powerpoint", "outlook", "pdf", "notepad","notepad++", "vim", "vi", "emacs", "sublime"
            ]
