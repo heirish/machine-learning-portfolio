@@ -1,0 +1,377 @@
+body,group_name
+"[error] [client 80.230.208.105] Directory index forbidden by rule: /home/
+",apache
+"[error] [client 64.94.163.159] Client sent malformed Host header
+",apache
+"[error] [client 66.31.142.16] File does not exist: /var/www/html/default.ida
+",apache
+"[notice] Apache configured
+",apache
+"[Fri Dec 13 06:59:54 2013] [error] [client 12.34.65.78] PHP Notice:
+",apache
+"[Tue Sep 30 11:30:13.262255 2014] [core:error] [pid 20101] [client 99.47.227.95:34567] AH00037: Symbolic link not allowed or link target not accessible: /usr/share/awstats/icon/mime/document.png
+",apache
+"[Tue Sep 30 12:11:21.258612 2014] [ssl:error] [pid 30473] AH02032: Hostname www.example.com provided via SNI and hostname ssl://www.example.com provided via HTTP are different
+",apache
+"[Tue Sep 30 12:24:22.891366 2014] [proxy:warn] [pid 2331] [client 77.127.180.111:54082] AH01136: Unescaped URL path matched ProxyPass; ignoring unsafe nocanon, referer: http://www.easylinker.co.il/he/links.aspx?user=bguyb
+",apache
+"[Tue Sep 30 14:25:44.895897 2014] [authz_core:error] [pid 31858] [client 99.47.227.95:38870] AH01630: client denied by server configuration: /var/www/example.com/docroot/
+",apache
+"[Thu Oct 23 15:17:55.926067 2014] [ssl:info] [pid 18838] [client 36.226.119.49:2359] AH02008: SSL library error 1 in handshake (server www.example.com:443)
+",apache
+"[Thu Oct 23 15:17:55.926123 2014] [ssl:info] [pid 18838] SSL Library Error: error:1407609B:SSL routines:SSL23_GET_CLIENT_HELLO:https proxy request -- speaking HTTP to HTTPS port!?
+",apache
+"[Sun Nov 23 18:49:01.713508 2014] [:error] [pid 15816] [client 141.8.147.9:51507] PHP Notice:  A non well formed numeric value encountered in /path/to/file.php on line 123
+",apache
+"[Tue Feb 07 08:50:22.679122 2017] [auth_basic:error] [pid 14446] [client 10.101.1.50:33168] AH01617: user pupkin: authentication failure for ""/secret/"": Password Mismatch
+",apache
+"[Tue Feb 07 02:43:19.799723 2017] [cgi:error] [pid 9721] [client 10.101.1.50:44324] AH02811: script not found or unable to stat: /var/www/html/showmail.pl
+",apache
+"[Thu Feb 02 01:44:27.699327 2017] [access_compat:error] [pid 7934] [client ::1:50058] AH01797: client denied by server configuration: /var/www/html/'
+",apache
+"[Thu Feb 02 00:59:02.285651 2017] [core:error] [pid 20009] (13)Permission denied: [client ::1:49934] AH00132: file permissions deny server access: /var/www/html/1
+",apache
+"Jun 24 10:35:29 hostname kernel: [49787.970285] audit: type=1400 audit(1403598929.839:88986): apparmor=""ALLOWED"" operation=""getattr"" profile=""/usr/sbin/dovecot//null-1//null-2//null-4a6"" name=""/home/admin/mails/new/"" pid=19973 comm=""imap"" requested_mask=""r"" denied_mask=""r"" fsuid=1003 ouid=1003
+",apparmor
+"Jun 23 20:46:15 hostname kernel: [   11.103248] audit: type=1400 audit(1403549175.177:2): apparmor=""STATUS"" operation=""profile_load"" name=""/sbin/klogd"" pid=2185 comm=""apparmor_parser""
+",apparmor
+"Jul 14 11:03:47 hostname kernel: [ 8665.951930] type=1400 audit(1405328627.702:54): apparmor=""DENIED"" operation=""open"" profile=""/usr/bin/evince"" name=""/etc/xfce4/defaults.list"" pid=16418 comm=""evince"" requested_mask=""r"" denied_mask=""r"" fsuid=1000 ouid=0
+",apparmor
+"Jun 16 17:37:39 hostname kernel: [891880.587989] audit: type=1400 audit(1314853822.672:33649): apparmor=""DENIED"" operation=""mknod"" parent=27250 profile=""/usr/lib/apache2/mpm-prefork/apache2//example.com"" name=""/usr/share/wordpress/1114140474e5f13bea68a4.tmp"" pid=27289 comm=""apache2"" requested_mask=""c"" denied_mask=""c"" fsuid=33 ouid=33
+",apparmor
+"Jun 16 17:37:39 hostname kernel: [891880.587989] audit: type =1400 audit(1315353795.331:33657): apparmor=""DENIED"" operation=""exec"" parent=14952 profile=""/usr/lib/apache2/mpm-prefork/apache2//example.com"" name=""/usr/lib/sm.bin/sendmail"" pid=14953 comm=""sh"" requested_mask=""x"" denied_mask=""x"" fsuid=33 ouid=0
+",apparmor
+"Aug 29 07:21:05 hostname asterisk[3284]: NOTICE[3734]: chan_sip.c:28088 in handle_request_register: Registration from '""3810"" <sip:3810@1.2.3.4:5060>' failed for '37.8.26.31:5065' - Wrong password
+",asterisk
+"Dec 16 18:02:04 asterisk1 asterisk[31774]: NOTICE[31787]: chan_sip.c:11242 in handle_request_register: Registration from '""503""<sip:503@192.168.1.107>' failed for '192.168.1.137' - Wrong password
+",asterisk
+"Aug 30 16:02:29 hostname asterisk[3284]: NOTICE[3734][C-00001c7a]: chan_sip.c:25650 in handle_request_invite: Call from '' (89.163.146.112:5071) to extension '70046313115067' rejected because extension not found in context 'default'.
+",asterisk
+"Dec 18 18:06:28 hostname cimserver[18575]: PGS17200: Authentication failed for user jones_b.
+",cimserver
+"Sep  1 10:25:29 10.10.10.1 %IPS-4-SIGNATURE: Sig:3051 Subsig:1 Sev:4 TCP Connection Window Size DoS [192.168.100.11:51654 -> 10.10.10.10:4444]
+",cisco_ios
+"Sep  1 10:25:29 10.10.10.1 %IPS-4-SIGNATURE: Sig:3051 Subsig:1 Sev:4 TCP Connection Window Size DoS [192.168.100.11:60797 -> 10.10.10.10:80]
+",cisco_ios
+"Sep  1 10:25:29 10.10.10.1 %IPS-4-SIGNATURE: Sig:5123 Subsig:2 Sev:5 WWW IIS Internet Printing Overflow [192.168.100.11:60797 -> 10.10.10.10:80]
+",cisco_ios
+"Sep  1 10:25:29 10.10.10.1 %SEC-6-IPACCESSLOGP: list 102 denied tcp 10.0.6.56(3067) -> 172.36.4.7(139), 1 packet
+",cisco_ios
+"Sep  1 10:25:29 10.10.10.1 %SEC-6-IPACCESSLOGP: list 199 denied tcp 10.0.61.108(1477) -> 10.0.127.20(445), 1 packet
+",cisco_ios
+"Dec 19 06:21:06 ny dovecot: imap-login: Disconnected (auth failed, 7 attempts in 111 secs): user=<thousands>, method=PLAIN, rip=109.201.200.201, lip=67.205.141.203, session=<+hgd5vxDBMZtycjJ>
+",dovecot
+"Jan 11 03:45:09 hostname dovecot: auth-worker(default): sql(username,1.2.3.4): unknown user
+",dovecot
+"Jan 11 03:42:09 hostname dovecot: auth(default): pam(user@example.com,1.2.3.4): pam_authenticate() failed: User not known to the underlying authentication module
+",dovecot
+"Jun 17 10:15:24 hostname dovecot: Dovecot v1.2.rc3 starting up (core dumps disabled)
+",dovecot
+"Jun 17 10:15:24 hostname dovecot: Fatal: auth(default): Support not compiled in for passdb driver 'ldap'
+",dovecot
+"Jun 17 10:15:24 hostname dovecot: Fatal: Auth process died too early - shutting down
+",dovecot
+"Jun 23 15:04:05 Info: imap-login: Login: user=<username>, method=PLAIN, rip=1.2.3.4, lip=1.2.3.5 Authentication Failure:
+",dovecot
+"Jan 11 03:42:09 hostname dovecot: auth-worker(default): sql(user@example.com,1.2.3.4): Password mismatch
+",dovecot
+"Mar 13 15:25:07 Info: auth(default): pam(user@example.com,::ffff:1.2.3.4): pam_authenticate() failed: User not known to the underlying authentication module
+",dovecot
+"Jul  4 17:30:51 hostname dovecot[2992]: pop3-login: Disconnected: rip=1.2.3.4, lip=1.2.3.5
+",dovecot
+"Jan 30 09:37:55 hostname dovecot: pop3-login: Aborted login: user=<username>, method=PLAIN, rip=::ffff:1.2.3.4, lip=::ffff:1.2.3.5
+",dovecot
+"Mar 13 15:25:07 Info: auth(default): passwd-file(user@example.com,::ffff:1.2.3.4): unknown user
+",dovecot
+"2017-01-23 03:44:14 dovecot_login authenticator failed for (hydra) [10.101.1.18]:35686: 535 Incorrect authentication data (set_id=user)
+",exim
+"2017-01-24 05:22:29 dovecot_plain authenticator failed for (test) [::1]:39454: 535 Incorrect authentication data (set_id=test)
+",exim
+"2017-01-24 03:09:46 SMTP connection from [10.101.1.10]:55010 (TCP/IP connection count = 1)
+",exim
+"2017-01-24 02:53:13 SMTP connection from (hydra) [10.101.1.10]:53682 lost
+",exim
+"2017-01-24 05:36:23 SMTP call from (000000) [::1]:39480 dropped: too many syntax or protocol errors (last command was ""123"")
+",exim
+"[Mon Feb 09 16:47:55.974089 2015] [:error] [pid 17675] [client 172.16.10.87] ModSecurity: Warning. Operator GE matched 4 at TX:outbound_anomaly_score. [file ""/etc/apache2/ModSecurity/activated_rules/modsecurity_crs_60_correlation.conf""] [line ""40""] [id ""981205""] [msg ""Outbound Anomaly Score Exceeded (score 4): The application is not available""] [hostname ""172.16.10.91""] [uri ""/wordpress/wp-includes/rss-functions.php""] [unique_id ""VNkA238AAQEAAEULYMwAAAAA""]
+",modsecurity
+"[Thu Jan 22 14:33:30.959520 2015] [:error] [pid 2406] [client 172.16.10.87] ModSecurity: Warning. Pattern match ""^(?i)(?:ft|htt)ps?(.*?)\\\\?+$"" at ARGS:path_prefix. [file ""/etc/apache2/ModSecurity/activated_rules/modsecurity_crs_40_generic_attacks.conf""] [line ""160""] [id ""950119""] [rev ""2""] [msg ""Remote File Inclusion Attack""] [data ""Matched Data: http://cirt.net/rfiinc.txt? found within ARGS:path_prefix: http://cirt.net/rfiinc.txt?""] [severity ""CRITICAL""] [ver ""OWASP_CRS/2.2.9""] [maturity ""9""] [accuracy ""9""] [tag ""OWASP_CRS/WEB_ATTACK/RFI""] [hostname ""172.16.10.91""] [uri ""/wordpress/web/BetaBlockModules//Module/Module.php""] [unique_id ""VMEmWn8AAQEAAAlmdHgAAAAI""]
+",modsecurity
+"[Mon Feb 09 21:17:06.798110 2015] [:error] [pid 8608] [client 172.16.10.57] ModSecurity: Audit log: Failed writing (requested 83 bytes, written 24): No space left on device [hostname ""172.16.10.91""] [uri ""/403.php""] [unique_id ""VNk-8n8AAQEAACGg7LEAAAAE""]
+",modsecurity
+"[Wed Feb 11 19:46:12.759594 2015] [:error] [pid 1130] [client 172.16.10.91] ModSecurity: Audit log: Failed to lock global mutex: Identifier removed [hostname ""172.16.10.91""] [uri ""/wordpress/wp-cron.php""] [unique_id ""VNvLw38AAQEAAARqTXsAAAAD""]
+",modsecurity
+"[Mon Feb 09 16:47:55.908176 2015] [:error] [pid 17679] [client 172.16.10.91] ModSecurity: Access denied with code 403 (phase 2). Operator EQ matched 0 at REQUEST_HEADERS. [file ""/etc/apache2/ModSecurity/activated_rules/modsecurity_crs_21_protocol_anomalies.conf""] [line ""47""] [id ""960015""] [rev ""1""] [msg ""Request Missing an Accept Header""] [severity ""NOTICE""] [ver ""OWASP_CRS/2.2.9""] [maturity ""9""] [accuracy ""9""] [tag ""OWASP_CRS/PROTOCOL_VIOLATION/MISSING_HEADER_ACCEPT""] [tag ""WASCTC/WASC-21""] [tag ""OWASP_TOP_10/A7""] [tag ""PCI/6.5.10""] [hostname ""172.16.10.91""] [uri ""/wordpress/wp-cron.php""] [unique_id ""VNkA238AAQEAAEUP9hIAAAAI""]
+",modsecurity
+"[Mon Feb 09 16:47:55.973954 2015] [:error] [pid 17675] [client 172.16.10.87] ModSecurity: Access denied with code 403 (phase 4). Pattern match ""^5\\\\d{2}$"" at RESPONSE_STATUS. [file ""/etc/apache2/ModSecurity/activated_rules/modsecurity_crs_50_outbound.conf""] [line ""53""] [id ""970901""] [rev ""2""] [msg ""The application is not available""] [data ""Matched Data: 500 found within RESPONSE_STATUS: 500""] [severity ""ERROR""] [ver ""OWASP_CRS/2.2.9""] [maturity ""9""] [accuracy ""9""] [tag ""WASCTC/WASC-13""] [tag ""OWASP_TOP_10/A6""] [tag ""PCI/6.5.6""] [hostname ""172.16.10.91""] [uri ""/wordpress/wp-includes/rss-functions.php""] [unique_id ""VNkA238AAQEAAEULYMwAAAAA""]
+",modsecurity
+"Aug 29 15:33:13 ns3 named[464]: client 217.148.39.3#1036: query (cache) denied
+",named
+"Aug 29 15:33:13 ns3 named[464]: client 217.148.39.4#32769: query (cache) denied 
+",named
+"Aug 29 15:33:13 ns3 named[464]: client 217.148.39.3#1036: query (cache) denied 
+",named
+"Aug 29 15:33:13 ns3 named[464]: client 217.148.39.3#1036: query (cache)
+",named
+"Mar 13 01:42:45 net19 named[6147]: client 31.150.218.239#6173 (odcdavcxkvin.games.yuanyou8.com): query (cache) 'odcdavcxkvin.games.yuanyou8.com/A/IN' denied
+",named
+"2014-05-23T10:25:58.681222-04:00 10.10.10.1 ssg5-serial: NetScreen device_id=0275112227993284  [Root]system-information-00767: System configuration saved by netscreen via web from host 10.10.10.101 to 10.10.10.1:443 by netscreen. (2014-05-23 10:58:17)
+",netscreen
+"2014-05-23T10:29:55.704201-04:00 10.10.10.1 ssg5-serial: NetScreen device_id=0275112227993284  [Root]system-notification-00018: Policy (5, Trust->Untrust, 10.10.10.0/24->172.16.19.0/24,ANY, Permit) was modified by netscreen via web from host 10.10.10.101 to 10.10.10.1:443. (2014-05-23 11:02:13)
+",netscreen
+"2014-05-23T10:39:20.681154-04:00 10.10.10.1 ssg5-serial: NetScreen device_id=0275112227993284  [Root]system-warning-00515: Management session via SSH from 10.10.10.100:0 for admin netscreen has timed out (2014-05-23 11:11:39)
+",netscreen
+"Jul  7 05:02:34 ssg5.17.168.192.in-addr.arpa ssg5: NetScreen device_id=ssg5  [Root]system-emergency-00005: SYN flood! From 192.168.18.53:41437 to 192.168.17.251:9612, proto TCP (zone Untrust int  ethernet0/0). Occurred 1 times. (2016-07-07 05:02:32)
+",netscreen
+"2014/12/30 06:07:37 [yadda] 80:2 yadda yadda
+",nginx
+"2014/12/30 06:07:37 [error] 80:2 yadda yadda
+",nginx
+"2014/12/30 06:07:37 [warn] 80:2 yadda yadda
+",nginx
+"2014/12/30 06:07:37 [crit] 80:2 
+",nginx
+"2015/01/08 11:31:23 [error] 80:2 blah blah failed (2: No such file or directory)
+",nginx
+"2015/01/08 11:31:23 [error] 80:2 blah blah is not found (2: No such file or directory)
+",nginx
+"2015/01/08 11:31:23 [error] 80:2 blah blah accept() failed (53: Software caused connection abort)
+",nginx
+"2015/01/08 11:31:23 [error] 80:2 no user/password was provided for basic authentication
+",nginx
+"2015/01/08 11:31:23 [error] 80:2 yadda password mismatch, client yadda
+",nginx
+"2015/01/08 11:31:23 [error] 80:2 yadda was not found in yadda
+",nginx
+"2015/01/08 11:31:23 [crit] 80:2 yadda yadda failed (2: No such file or directory
+",nginx
+"2015/01/08 11:31:23 [error] 80:2 yadda yadda failed (36: File name too long)
+",nginx
+"Jan 26 18:12:55 junction dhcpd[4842]: IP address 192.168.1.16 answers a ping after sending a release
+",openbsd-dhcpd
+"Jan 26 18:12:40 junction dhcpd[4842]: Possible release spoof - Not releasing address 192.168.17.160
+",openbsd-dhcpd
+"Jan 26 17:42:32 junction dhcpd[4842]: no free leases on subnet 192.168.17.0
+",openbsd-dhcpd
+"Jan 27 09:25:36 junction dhcpd[71391]: DHCPREQUEST for 192.168.17.164 from f4:8c:50:9d:eb:35 via em1
+",openbsd-dhcpd
+"Jan 27 09:25:36 junction dhcpd[71391]: DHCPDISCOVER from f4:8c:50:9d:eb:35 via em1
+",openbsd-dhcpd
+"Jan 27 09:25:31 junction dhcpd[71391]: DHCPOFFER on 192.168.17.164 to f4:8c:50:9d:eb:35 via em1
+",openbsd-dhcpd
+"Aug 14 10:15:25 junction.example.com smtpd[28882]: smtp-in: Failed command on session 1f55bdcdf16e28a3: ""MAIL FROM:<root@junction.example.com>  "" => 421 4.3.0: Temporary Error
+",opensmtpd
+"Aug 17 01:26:02 ix smtpd[22704]: smtp-in: New session 08d856b172f69c5c from host ix.example.com [local]
+",opensmtpd
+"Aug 17 01:26:02 ix smtpd[22704]: smtp-in: Accepted message 4296f490 on session 08d856b172f69c5c: from=<root@ix.example.com>, to=<ddp@ix.example.com>, size=1746, ndest=1, proto=ESMTP
+",opensmtpd
+"Aug 17 01:26:02 ix smtpd[22704]: smtp-in: Closing session 08d856b172f69c5c
+",opensmtpd
+"Mar  4 00:11:00 ix smtpd[22421]: smtp-in: Received disconnect from session 427e7493ebe154ae
+",opensmtpd
+"Mar  4 00:13:55 ix smtpd[22421]: smtp-in: Disconnecting session 427e7497e03518ef: IO error: No SSL error
+",opensmtpd
+"Mar  4 00:13:55 ix smtpd[22421]: smtp-in: Started TLS on session 427e749c2e46f809: version=TLSv1.2, cipher=EDH-RSA-DES-CBC3-SHA, bits=112
+",opensmtpd
+"Sat May  7 03:17:27 CDT 2011 /var/ossec/active-response/bin/host-deny.sh add - 172.16.0.1 1304756247.60385 31151
+",ossec
+"Sat May  7 03:17:27 CDT 2011 /var/ossec/active-response/bin/firewall-drop.sh add - 172.16.0.1 1304756247.60385 31151
+",ossec
+"Sat May  7 03:27:57 CDT 2011 /var/ossec/active-response/bin/host-deny.sh delete - 172.16.0.1 1304756247.60385 31151
+",ossec
+"Sat May  7 03:27:57 CDT 2011 /var/ossec/active-response/bin/firewall-drop.sh delete - 172.16.0.1 1304756247.60385 31151
+",ossec
+"2015/01/29 21:09:49 ossec-logcollector(1950): INFO: Analyzing file: '/var/log/httpd/error_log'.
+",ossec
+"ossec: Agent started: 'any'
+",ossec
+"Nov 11 22:46:29 localhost su(pam_unix)[23164]: authentication failure; logname= uid=1342 euid=0 tty= ruser=dcid rhost=  user=osaudit
+",pam
+"Jun 28 23:01:27 xxxx auth: pam_unix(dovecot:auth): authentication failure; logname= uid=0 euid=0 tty=dovecot ruser=lipjigaglgihgoeadcdaa.p.salmon@xxx.xxx.xxx.xxx rhost=91.195.103.44
+",pam
+"Nov 11 22:46:29 localhost vsftpd(pam_unix)[25073]: check pass; user unknown
+",pam
+"Nov 11 22:46:29 localhost su(pam_unix)[14592]: session opened for user news by (uid=0)
+",pam
+"Nov 11 22:46:29 localhost su(pam_unix)[14592]: session closed for user news
+",pam
+"Nov 11 22:46:29 localhost sshd(pam_unix)[15794]: 2 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=10.0.3.1  user=root
+",pam
+"May  8 08:26:55 mail postfix/postscreen[22055]: NOQUEUE: reject: RCPT from [157.122.148.242]:47407: 550 5.7.1 Service unavailable; client [157.122.148.242] blocked using bl.spamcop.net; from=<kos@mafia.network>, to=<z13699753428@vip.163.com>, proto=ESMTP, helo=<XL-20160217QQJV>
+",postfix
+"Jan 04 22:51:57 server proftpd[26169] server.example.net: Fatal: unable to open incoming connection: Der Socket ist nicht verbunden
+",proftpd
+"Jan 04 22:51:57 hayaletgemi proftpd[26916]: hayaletgemi (85.101.218.135[85.101.218.135]) - ANON anonymous: Login successful.
+",proftpd
+"Jan 04 22:51:57 juf01 proftpd[12564]: juf01 (pD9EE35B1.dip.t-dialin.net[217.238.53.177]) - USER jufu: Login successful
+",proftpd
+"Jan 04 22:51:57 xx.yy.zz proftpd[30362] xx.yy.zz (aa.bb.cc[aa.bb.vv.dd]): USER backup: Login successful.
+",proftpd
+"Jan 04 22:51:57 server proftpd[2344]: refused connect from 192.168.1.2 (192.168.1.2)
+",proftpd
+"Jan 04 22:51:57 valhalla proftpd[15181]: valhalla (crawl-66-249-66-80.googlebot.com[66.249.66.80]) - Connection from crawl-66-249-66-80.googlebot.com [66.249.66.80] denied.
+",proftpd
+"2015-04-16 21:51:02,805 zuse proftpd[26189] zuse.domain.com (182.100.67.115[182.100.67.115]): USER root (Login failed): Incorrect password
+",proftpd
+"Dec 17 10:49:23 hostname rshd[347339]: Connection from 10.217.223.31 on illegal port 
+",rsh
+"Dec 18 18:06:28 hostname smbd[832]: Denied connection from (192.168.3.23)
+",samba
+"Dec 18 18:06:28 hostname smbd[832]: Denied connection from (192.168.3.23)
+",samba
+"Feb  9 11:44:56 someserver sshd[1234]: error: Could not stat AuthorizedKeysCommand ""/usr/local/sbin/ssh-ldap-authorized_keys"": No such file or directory
+",sshd
+"Feb 10 23:21:05 someserver sshd[1234]: Read error from remote host 192.168.1.1: Connection reset by peer
+",sshd
+"Feb 11 06:41:50 someserver sshd[1234]: debug1: channel 5: connection failed: Connection refused
+",sshd
+"Feb 12 17:45:09 someserver sshd[1234]: debug1: channel 3: connection failed: Connection timed out
+",sshd
+"Jan 30 18:55:24 someserver sshd[1234]: debug1: channel 1: connection failed: No route to host
+",sshd
+"Feb 13 22:54:51 someserver sshd[1234]: debug1: server_input_channel_open: failure direct-tcpip
+",sshd
+"Feb  6 12:28:17 someserver sshd[1234]: debug1: getpeername failed: Transport endpoint is not connected
+",sshd
+"Feb  6 12:28:17 someserver sshd[1234]: debug1: get_remote_port failed
+",sshd
+"Feb  4 23:05:57 someserver sshd[1234]: Disconnecting: bad client public DH value [preauth]
+",sshd
+"Feb  4 23:05:57 someserver sshd[1234]: Disconnecting: bad client public DH value
+",sshd
+"Feb 14 14:34:15 someserver sshd[1234]: Corrupted MAC on input. [preauth]
+",sshd
+"Nov 22 19:24:55 server sshd[4046]: Corrupted MAC on input.
+",sshd
+"Mar  4 13:34:59 someserver sshd[5396]: Bad packet length 4081586742. [preauth]
+",sshd
+"Mar  4 13:34:59 someserver sshd[5396]: Bad packet length 4081586742.
+",sshd
+"Mar  3 10:56:18 junction sshd[32065]: fatal: Unable to negotiate with 202.191.177.33 port 3579: no matching cipher found. Their offer: 3des-cbc,aes128-cbc,aes192-cbc,aes256-cbc [preauth]
+",sshd
+"Sep 16 05:46:56 junction sshd[1961]: fatal: Unable to negotiate with 108.229.36.174: no matching key exchange method found. Their offer: diffie-hellman-group1-sha1,diffie-hellman-group-exchange-sha1 [preauth]
+",sshd
+"Apr 18 21:27:08 web2 sshd[23484]: fatal: Unable to negotiate a key exchange method [preauth]
+",sshd
+"2013-10-30T14:51:21.901728+01:00 srv sshd[12664]: Postponed keyboard-interactive for invalid user warez from 192.241.237.101 port 54197 ssh2 [preauth]
+",sshd
+"2013-10-30T14:51:24.140565+01:00 srv sshd[12664]: Failed keyboard-interactive/pam for invalid user warez from 192.241.237.101 port 54197 ssh2
+",sshd
+"2013-10-30T14:51:30.267401+01:00 srv sshd[12671]: Invalid user opcione from 192.241.237.101
+",sshd
+"May  4 17:48:43 collectd sshd[15044]: pam_systemd(sshd:session): Failed to create session: Access denied
+",sshd
+"May  4 18:30:04 collectd sshd[15191]: Authentication refused: bad ownership or modes for file /home/ansible/.ssh/authorized_keys
+",sshd
+"May  5 05:00:38 junction sshd[28395]: subsystem request for netconf by user checker failed, subsystem not found
+",sshd
+"Aug 18 07:30:25 192.168.1.5 sshd[20247]: [ID 800047 auth.notice] Failed none for root from 192.168.1.1 port 36942 ssh2
+",sshd
+"Oct 20 12:33:07 ar-agent sshd[3433]: Address 192.168.18.54 maps to nmap.18.168.192.in-addr.arpa, but this does not map back to the address - POSSIBLE BREAK-IN ATTEMPT!
+",sshd
+"Dec 27 03:23:51 r1 sshd[21183]: error: maximum authentication attempts exceeded for root from 183.106.179.x port 34100 ssh2 [preauth]
+",sshd
+"Jun 28 19:35:39 xxx sshd[30255]: Bad protocol version identification '' from 188.18.81.21 port 60787
+",sshd
+"Aug 30 18:12:54 hostname sshd[25350]: refused connect from 103.79.143.159 (103.79.143.159)
+",sshd
+"Apr 27 15:22:23 niban su[2921936]: failed: ttyq4 changing from ldap to root
+",su
+"Apr 27 15:22:23 niban su[234]: BAD SU ger to fwmaster on /dev/ttyp0
+",su
+"Apr 22 17:51:51 enigma su: dcid to root on /dev/ttyp1
+",su
+"Apr 27 15:22:23 niban sudo:     dcid : TTY=pts/4 ; PWD=/home/dcid ; USER=root ; COMMAND=/usr/bin/tail /var/log/snort/alert.fast
+",sudo
+"Apr 14 10:59:01 enigma sudo:     dcid : TTY=ttyp3 ; PWD=/home/dcid/ossec-hids.0.1a/src/analysisd ; USER=root ; COMMAND=/bin/cp -pr ../../bin/addagent ../../bin/osaudit-logaudit ../../bin/ossec-execd ../../bin/ossec-logcollector ../../bin/ossec-maild ../../bin/ossec-remoted /var/ossec/bin
+",sudo
+"Apr 19 14:52:02 enigma sudo:     dcid : TTY=ttyp3 ; PWD=/var/www/alex ; USER=root ; COMMAND=/sbin/chown dcid.dcid .
+",sudo
+"Dec 30 19:36:11 rheltest sudo: cplummer : TTY=pts/2 ; PWD=/home/cplummer1 ; USER=root ; TSID=0000UM ; COMMAND=/bin/bash
+",sudo
+"Jun 25 15:51:13 precise32 sudo:     mike : 1 incorrect password attempt ; TTY=pts/0 ; PWD=/root ; USER=root ; COMMAND=/bin/ls
+",sudo
+"Jun 25 15:48:21 precise32 sudo:  mike : TTY=pts/0 ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/su -
+",sudo
+"Jun 25 16:15:45 precise32 sudo:     mike : 3 incorrect password attempts ; TTY=pts/0 ; PWD=/root ; USER=root ; COMMAND=/bin/ls
+",sudo
+"Apr 13 08:36:31 ix sudo:     ddp2 : user NOT in sudoers ; TTY=ttypZ ; PWD=/home/ddp2 ; USER=root ; COMMAND=/bin/ls
+",sudo
+"2014 Dec 20 14:29:48 (HME-TEST-01) 10.0.15.14->WinEvtLog 2014 Dec 20 09:29:47 WinEvtLog: Microsoft-Windows-Sysmon/Operational: INFORMATION(1): Microsoft-Windows-Sysmon: SYSTEM: NT AUTHORITY: WIN-U93G48C7BOP: Process Create:  UtcTime: 12/20/2014 2:29 PM  ProcessGuid: {00000000-87DB-5495-0000-001045F25A00}  ProcessId: 3048  Image: C:\Windows\system32\svchost.exe  CommandLine: ""C:\Windows\system32\NOTEPAD.EXE"" C:\Users\Administrator\Desktop\ossec.log  User: WIN-U93G48C7BOP\Administrator  LogonGuid: {00000000-84B8-5494-0000-0020CB330200}  LogonId: 0x233CB  TerminalSessionId: 1  IntegrityLevel: High  HashType: SHA1  Hash: 9FEF303BEDF8430403915951564E0D9888F6F365  ParentProcessGuid: {00000000-84B9-5494-0000-0010BE4A0200}  ParentProcessId: 848  ParentImage: C:\Windows\Explorer.EXE  ParentCommandLine: C:\Windows\Explorer.EXE
+",sysmon
+"2014 Dec 20 12:15:13 (HME-TEST-01) 10.0.15.14->WinEvtLog 2014 Dec 20 09:29:47 WinEvtLog: Microsoft-Windows-Sysmon/Operational: INFORMATION(1): Microsoft-Windows-Sysmon: SYSTEM: NT AUTHORITY: WIN-U93G48C7BOP: Process Create:  UtcTime: 12/20/2014 12:15 PM  ProcessGuid: {00000000-87DB-5495-0000-001045F25A00}  ProcessId: 3048  Image: C:\Windows\system32\svchost.exe  CommandLine: ""C:\windows\system32\svchost.exe -k defragsvc""  User: NT AUTHORITY\SYSTEM  LogonGuid: {00000000-84B8-5494-0000-0020CB330200}  LogonId: 0x233CB  TerminalSessionId: 1  IntegrityLevel: High  HashType: SHA1  Hash: 9FEF303BEDF8430403915951564E0D9888F6F365  ParentProcessGuid: {00000000-84B9-5494-0000-0010BE4A0200}  ParentProcessId: 848  ParentImage: C:\Windows\System32\services.exe  ParentCommandLine: C:\Windows\System32\services.exe
+",sysmon
+"Wed Jul 27 18:32:27 2016 [pid 2] CONNECT: Client ""fe80::baac:6fff:fe7d:d2e0""
+",vsftpd
+"Wed Jul 27 18:32:27 2016 [pid 2] CONNECT: Client ""10.11.12.13""
+",vsftpd
+"Mon Oct 24 11:32:53 2016 [pid 1] [$ALOC$] FAIL LOGIN: Client ""10.55.112.101""
+",vsftpd
+"Mon Oct 24 11:32:53 2016 [pid 1] [$ALOC$] FAIL LOGIN: Client ""fe80::baac:6fff:fe7d:d2e0""
+",vsftpd
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""POST /wp-comments-post.php HTTP/1.1"" 403 181 ""-"" ""Googlebot/1
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""POST /wp-comments-post.php HTTP/1.1"" 403 181 ""-"" ""msnbot/1
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""POST /wp-comments-post.php HTTP/1.1"" 403 181 ""-"" ""BingBot/1
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET /examplethumb.php?src=example.php HTTP/1.1"" 403 181 ""-"" ""Mozilla/5.0 (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""POST /example.php/login.php?cPath= HTTP/1.1"" 403 181 ""-"" ""Mozilla/5.0 (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""POST /admin/example.php/login.php HTTP/1.1"" 403 181 ""-"" ""Mozilla/5.0 (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET /example/cache/externalexample.php HTTP/1.1"" 403 181 ""-"" ""Mozilla/5.0 (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET /examplecart.php?exampletemplatefile=../ HTTP/1.1"" 403 181 ""-"" ""Mozilla/5.0 (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET / HTTP/1.1"" 403 181 ""-"" ""ZmEu""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET / HTTP/1.1"" 403 181 ""-"" ""libwww-perl/1.1 (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET / HTTP/1.1"" 403 181 ""-"" ""the beast""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET / HTTP/1.1"" 403 181 ""-"" ""Morfeus""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET / HTTP/1.1"" 403 181 ""-"" ""ZmEu (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET / HTTP/1.1"" 403 181 ""-"" ""Nikto (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET / HTTP/1.1"" 403 181 ""-"" ""w3af.sourceforge.net (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET / HTTP/1.1"" 403 181 ""-"" ""MJ12bot/v (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""POST /example/wp-login.php HTTP/1.1"" 200 181 ""-"" ""Mozilla/5.0 (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""POST /administrator HTTP/1.1"" 200 181 ""-"" ""Mozilla/5.0 (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET /index.html? HTTP/1.1"" 200 4617 ""-"" ""Wget/1.15 (linux-gnu)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET /example/uploadify.php?src=http://example.php HTTP/1.1"" 403 181 ""-"" ""Mozilla/5.0 (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET example/delete.php?board_skin_path=http://example.php HTTP/1.1"" 403 181 ""-"" ""Mozilla/5.0 (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET example/shell.php?cmd= HTTP/1.1"" 403 181 ""-"" ""Mozilla/5.0 (X11)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET /phpMyAdmin/scripts/setup.php HTTP/1.1"" 404 4617 ""-"" ""Mozilla/15 (linux-gnu)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET /db/config.php.swp HTTP/1.1"" 404 4617 ""-"" ""Mozilla/15 (linux-gnu)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET /db/config.php.bak HTTP/1.1"" 404 4617 ""-"" ""Mozilla/15 (linux-gnu)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET /db/.htaccess HTTP/1.1"" 404 4617 ""-"" ""Mozilla/15 (linux-gnu)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET /server-status HTTP/1.1"" 404 4617 ""-"" ""Mozilla/15 (linux-gnu)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET /.ssh HTTP/1.1"" 404 4617 ""-"" ""Mozilla/15 (linux-gnu)""
+",web_appsec
+"10.0.0.5 - - [1/Apr/2014:00:00:01 -0500] ""GET /.history HTTP/1.1"" 404 4617 ""-"" ""Mozilla/15 (linux-gnu)""
+",web_appsec
+"2014-12-20 21:34:37 W3SVC58 XXX-XXWEB-01 1.2.3.4 GET /search/programdetails.aspx id=3542&print=');declare%20@c%20cursor;declare%20@d%20varchar(4000);set%20@c=cursor%20for%20select%20'update%20%5B'%2BTABLE_NAME%2B'%5D%20set%20%5B'%2BCOLUMN_NAME%2B'%5D=%5B'%2BCOLUMN_NAME%2B'%5D%2Bcase%20ABS(CHECKSUM(NewId()))%257%20when%200%20then%20''''%2Bchar(60)%2B''div%20style=%22display:none%22''%2Bchar(62)%2B''abortion%20pill%20prescription%20''%2Bchar(60)%2B''a%20href=%22http:''%2Bchar(47)%2Bchar(47)%2BREPLACE(case%20ABS(CHECKSUM(NewId()))%253%20when%200%20then%20''www.yeronimo.com@template''%20when%201%20then%20''www.tula-point.ru@template''%20else%20''blog.tchami.com@template''%20end,''@'',char(47))%2B''%22''%2Bchar(62)%2Bcase%20ABS(CHECKSUM(NewId()))%253%20when%200%20then%20''online''%20when%201%20then%20''i%20need%20to%20buy%20the%20abortion%20pill''%20else%20''abortion%20pill''%20end%20%2Bchar(60)%2Bchar(47)%2B''a''%2Bchar(62)%2B''%20where%20to%20buy%20abortion%20pill''%2Bchar(60)%2Bchar(47)%2B''div''%2Bchar(62)%2B''''%20else%20''''%20end'%20FROM%20sysindexes%20AS%20i%20INNER%20JOIN%20sysobjects%20AS%20o%20ON%20i.id=o.id%20INNER%20JOIN%20INFORMATION_SCHEMA.COLUMNS%20ON%20o.NAME=TABLE_NAME%20WHERE(indid=0%20or%20indid=1)%20and%20DATA_TYPE%20like%20'%25varchar'%20and(CHARACTER_MAXIMUM_LENGTH=-1%20or%20CHARACTER_MAXIMUM_LENGTH=2147483647);open%20@c;fetch%20next%20from%20@c%20into%20@d;while%20@@FETCH_STATUS=0%20begin%20exec%20(@d);fetch%20next%20from%20@c%20into%20@d;end;close%20@c-- 80 - 173.201.216.6 HTTP/1.1 Mozilla/5.0+(Windows+NT+6.1;+WOW64;+rv:24.0)+Gecko/20100101+Firefox/24.0');declare+@c+cursor;declare+@d+varchar(4000);set+@c=cursor+for+select+'update+['+TABLE_NAME+']+set+['+COLUMN_NAME+']=['+COLUMN_NAME+']+case+ABS(CHECKSUM(NewId()))%7+when+0+then+''''+char(60)+''div+style=""display:none""''+char(62)+''abortion+pill+prescription+''+char(60)+''a+href=""http:''+char(47)+char(47)+REPLACE(case+ABS(CHECKSUM(NewId()))%3+when+0+then+''www.yeronimo.com@template''+when+1+then+''www.tula-point.ru@template''+else+''blog.tchami.com@template''+end,''@'',char(47))+''""''+char(62)+case+ABS(CHECKSUM(NewId()))%3+when+0+then+''online''+when+1+then+''i+need+to+buy+the+abortion+pill''+else+''abortion+pill''+end++char(60)+char(47)+''a''+char(62)+''+where+to+buy+abortion+pill''+char(60)+char(47)+''div''+char(62)+''''+else+''''+end'+FROM+sysindexes+AS+i+INNER+JOIN+sysobjects+AS+o+ON+i.id=o.id+INNER+JOIN+INFORMATION_SCHEMA.COLUMNS+ON+o.NAME=TABLE_NAME+WHERE(indid=0+or+indid=1)+and+DATA_TYPE+like+'%varchar'+and(CHARACTER_MAXIMUM_LENGTH=-1+or+CHARACTER_MAXIMUM_LENGTH=2147483647);open+@c;fetch+next+from+@c+into+@d;while+@@FETCH_STATUS=0+begin+exec+(@d);fetch+next+from+@c+into+@d;end;close+@c-- - http://google.com');declare+@c+cursor;declare+@d+varchar(4000);set+@c=cursor+for+select+'update+['+TABLE_NAME+']+set+['+COLUMN_NAME+']=['+COLUMN_NAME+']+case+ABS(CHECKSUM(NewId()))%7+when+0+then+''''+char(60)+''div+style=""display:none""''+char(62)+''abortion+pill+prescription+''+char(60)+''a+href=""http:''+char(47)+char(47)+REPLACE(case+ABS(CHECKSUM(NewId()))%3+when+0+then+''www.yeronimo.com@template''+when+1+then+''www.tula-point.ru@template''+else+''blog.tchami.com@template''+end,''@'',char(47))+''""''+char(62)+case+ABS(CHECKSUM(NewId()))%3+when+0+then+''online''+when+1+then+''i+need+to+buy+the+abortion+pill''+else+''abortion+pill''+end++char(60)+char(47)+''a''+char(62)+''+where+to+buy+abortion+pill''+char(60)+char(47)+''div''+char(62)+''''+else+''''+end'+FROM+sysindexes+AS+i+INNER+JOIN+sysobjects+AS+o+ON+i.id=o.id+INNER+JOIN+INFORMATION_SCHEMA.COLUMNS+ON+o.NAME=TABLE_NAME+WHERE(indid=0+or+indid=1)+and+DATA_TYPE+like+'%varchar'+and(CHARACTER_MAXIMUM_LENGTH=-1+or+CHARACTER_MAXIMUM_LENGTH=2147483647);open+@c;fetch+next+from+@c+into+@d;while+@@FETCH_STATUS=0+begin+exec+(@d);fetch+next+from+@c+into+@d;end;close+@c-- www.somesite.org 200 0 0 36560 3942 78
+",web_rules
+"2015-07-28 15:07:26 1.2.3.4 GET /QOsa/Browser/Default.aspx UISessionId=SN1234123&DeviceId=SN12312232SHARP+MX-4111N 80 - 31.3.3.7 OpenSystems/1.0;+product-family=""85"";+product-version=""123ER123"" 302 0 0 624
+",web_rules
+"2015-03-11 21:59:09 1.2.3.4 GET /console/faces/com_sun_web_ui/jsp/version/version_30.jsp - 80 - 31.3.3.7 Sun+Web+Console+Fingerprinter/7.15 - 404 0 2 0
+",web_rules
+"2015-03-11 22:01:59 1.2.3.4 GET /CFIDE/adminapi/customtags/l10n.cfm attributes.id=test&attributes.file=../../administrator/mail/download.cfm&filename=../lib/password.properties&attributes.locale=it&attributes.var=it&attributes.jscript=false&attributes.type=text/html&attributes.charset=UTF-8&thisTag.executionmode=end&thisTag.generatedContent=test 443 - 31.3.3.7 - - 404 0 2 0
+",web_rules

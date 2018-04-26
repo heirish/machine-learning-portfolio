@@ -1,0 +1,662 @@
+group_name,body,description
+"apache,",^[error],Apache error messages grouped.
+"apache,",^[warn],Apache warn messages grouped.
+"apache,",^[notice],Apache notice messages grouped.
+"apache,",exit signal Segmentation Fault,Apache segmentation fault.
+"apache,",denied by server configuration,Attempt to access forbidden file or directory.
+"apache,",Directory index forbidden by rule,Attempt to access forbidden directory index.
+"apache,",Client sent malformed Host header,Code Red attack.
+"apache,",authentication failed,User authentication failed.
+"apache,",user \S+ not found|user \S+ in realm \.* not found,Attempt to login using a non-existent user.
+"apache,",authentication failure,User authentication failed.
+"apache,","['File does not exist: |', 'failed to open stream: No such file or directory|', 'Failed opening']",Attempt to access an non-existent file (those are reported on the access.log).
+"apache,",Invalid URI in request,Invalid URI (bad client request).
+"apache,",File name too long|request failed: URI too long,"Invalid URI, file name too long."
+"apache,",mod_security: Access denied|ModSecurity: Access denied,Access attempt blocked by Mod Security.
+"apache,",Resource temporarily unavailable:,Apache without resources to run.
+"apache,",^mod_security-message:,Modsecurity alert.
+"apache,",^mod_security-message: Access denied,Modsecurity access denied.
+"apache,",[\S*:error],Apache error messages grouped.
+"apache,",[\S+:warn],Apache warn messages grouped.
+"apache,",[\S+:notice],Apache notice messages grouped.
+"apache,",exit signal Segmentation Fault,Apache segmentation fault.
+"apache,","['File does not exist: |', 'failed to open stream: No such file or directory|', 'Failed opening']",Attempt to access an non-existent file (those are reported on the access.log).
+"apache,",PHP Notice:,PHP Notice in Apache log
+"apache,",File name too long:,File name too long.
+"apache,",Permission denied: | client denied by server configuration:,Permission denied.
+"apache,",script not found,A script cannot be accessed.
+"apache,",ModSecurity: Warning,ModSecurity Warning messages grouped
+"apache,",ModSecurity: Access denied,ModSecurity Access denied messages grouped
+"apache,",ModSecurity: Audit log:,ModSecurity Audit log messages grouped
+"apache,",with code 403,ModSecurity rejected a query
+"local,syslog,apparmor",apparmor=,Apparmor grouping
+"local,syslog,apparmor",apparmor=,Apparmor DENIED
+"syslog,arpwatch,",flip flop,"['Arpwatch ""flip flop"" message.', 'IP address/MAC relation changing too often.']"
+"syslog,arpwatch,",reaper: pid,Arpwatch exiting.
+"syslog,arpwatch,",changed ethernet address,Changed network interface for ip address.
+"syslog,arpwatch,",bad interface eth0|exiting|Running as,Arpwatch startup/exiting messages.
+"syslog,arpwatch,",sent bad addr len,Arpwatch detected bad address len (ignored).
+"syslog,arpwatch,",/dev/bpf0: Permission denied,arpwatch probably run with wrong permissions
+"syslog,arpwatch,",reused old ethernet address,An IP has reverted to an old ethernet address.
+"syslog,arpwatch,",ethernet mismatch,Possible arpspoofing attempt.
+"syslog,asterisk,",^NOTICE,Asterisk notice messages grouped.
+"syslog,asterisk,",^WARN,Asterisk warning message.
+"syslog,asterisk,",^ERROR,Asterisk error message.
+"syslog,asterisk,",Wrong password,Login session failed.
+"syslog,asterisk,",Username/auth name mismatch,Login session failed (invalid user).
+"syslog,asterisk,",No matching peer found,Login session failed (invalid extension).
+"syslog,asterisk,",No registration for peer,Login session failed (invalid iax user).
+"syslog,asterisk,",Don't know how to respond via,Possible Registration Hijacking.
+"syslog,asterisk,",failed MD5 authentication,IAX peer Wrong Password.
+"syslog,asterisk,",No matching peer found|extension not found in context,Login session failed (invalid extension).
+"syslog,attacks,",,System user successfully logged to the system.
+"syslog,attacks,",,Buffer overflow attack on rpc.statd
+"syslog,attacks,",,Buffer overflow on WU-FTPD versions prior to 2.6
+"syslog,attacks,",?????????????????????,Possible buffer overflow attempt.
+"syslog,attacks,",changed by \(\(null\),"""Null"" user changed some information."
+"syslog,attacks,",@@@@@@@@@@@@@@@@@@@@@@@@@,Buffer overflow attempt (probably on yppasswd).
+"syslog,attacks,",,Heap overflow in the Solaris cachefsd service.
+"syslog,attacks,",attempt to execute code on stack by,"['Stack overflow attempt or program exiting', 'with SEGV (Solaris).']"
+"syslog,attacks,",,Multiple authentication failures.
+"syslog,attacks,",,"['Multiple authentication failures followed', 'by a success.']"
+"syslog,attacks,",,Multiple viruses detected - Possible outbreak.
+"syslog,cimserver,",Authentication failed,Compaq Insight Manager authentication failure.
+"syslog,cimserver,",Server stopped,Compaq Insight Manager stopped.
+"clamd,freshclam,",FOUND,Virus detected
+"clamd,freshclam,",^ERROR:,Clamd error
+"clamd,freshclam,",^WARNING:,Clamd warning
+"clamd,freshclam,",clamd daemon,Clamd restarted
+"clamd,freshclam,",Database modification detected,Clamd database updated
+"clamd,freshclam,",ClamAV update process started,ClamAV database update
+"clamd,freshclam,",Database updated,ClamAV database updated
+"clamd,freshclam,",Incremental update failed|Error while reading database from|Update failed.,Could not download the incremental virus definition updates.
+"syslog,courier,","^Connection,",New courier (imap/pop3) connection.
+"syslog,courier,","^LOGIN FAILED,| FAILED:",Courier (imap/pop3) authentication failed.
+"syslog,courier,","^LOGOUT,|^DISCONNECTED",Courier logout/timeout.
+"syslog,courier,","^LOGIN,",Courier (imap/pop3) authentication success.
+"dovecot,",login: Login:,Dovecot Authentication Success.
+"dovecot,",Password mismatch$,Dovecot Authentication Failed.
+"dovecot,",starting up,Dovecot is Starting Up.
+"dovecot,",^Fatal:,Dovecot Fatal Failure.
+"dovecot,",user not found|User not known|unknown user|auth failed,Dovecot Invalid User Login Attempt.
+"dovecot,",: Disconnected:,Dovecot Session Disconnected.
+"dovecot,",: Aborted login,Dovecot Aborted Login.
+"dovecot,",user not found|User not known|unknown user|auth failed,Dovecot Invalid User Login Attempt.
+"syslog,sshd,dropbear",Failed to get kex value,Failed to get key exchange value
+"syslog,sshd,dropbear",Premature kexdh_init message received,Premature kexdh_init message
+"syslog,sshd,dropbear",bad password attempt for,Bad password attempt.
+"syslog,sshd,dropbear",attempt for nonexistent user,Bad password attempt for non existent user.
+"syslog,sshd,dropbear",exit after auth \(\S+\): Disconnect received,User disconnected.
+"syslog,sshd,dropbear",exit before auth,Client exited before authentication.
+"syslog,sshd,dropbear",Incompatible remote version,Incompatible remote version.
+"syslog,sshd,dropbear",password auth succeeded for,User successfully logged in using a password.
+"syslog,sshd,dropbear",Pubkey auth succeeded,User successfully logged in using a public key.
+"exim,",^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d SMTP,Exim SMTP Messages Grouped.
+"exim,",^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d dovecot,dovecot messages grouped.
+"exim,",authenticator failed,Exim Auth failed
+"exim,",connection count =,Exim connection
+"exim,",lost$,Exim connection lost
+"exim,",dropped: too many syntax or protocol errors,Exim syntax or protocol errors
+"local,firewalld,",ERROR:,firewalld error
+"local,firewalld,",No chain/target/match by that name.$,Incorrect chain/target/match.
+"local,firewalld,",ZONE_ALREADY_SET$,firewalld: zone already set.
+"syslog,ftpd,",FTP LOGIN REFUSED,FTP connection refused.
+"syslog,ftpd,",created,File created via FTP
+"syslog,ftpd,",deleted,File deleted via FTP
+"syslog,ftpd,",FTPD: IMPORT file,User uploaded a file to server.
+"syslog,ftpd,",FTPD: EXPORT file,User downloaded a file to server.
+"syslog,ftpd,",FTP LOGIN FROM|connection from|connect from,Remote host connected to FTP server.
+"syslog,ftpd,",refused connect from,Connection blocked by Tcp Wrappers.
+"syslog,ftpd,",warning: can't verify hostname: |gethostbyaddr:,Reverse lookup error (bad ISP config).
+"syslog,ftpd,",repeated login failures,Multiple FTP failed login attempts.
+"syslog,ftpd,",timed out after,User disconnected due to time out.
+"syslog,ftpd,",PAM_ERROR_MSG: Account is disabled,Attempt to login with disabled account.
+"syslog,ftpd,",^Failed authentication from,FTP authentication failure.
+"syslog,ftpd,",^login \S+ from \S+ failed,FTP authentication failure.
+"syslog,hordeimp,",^[info],Horde IMP informational message.
+"syslog,hordeimp,",^[notice],Horde IMP notice message.
+"syslog,hordeimp,",^[error],Horde IMP error message.
+"syslog,hordeimp,",^[emergency],Horde IMP emergency message.
+"syslog,hordeimp,",Login success for,Horde IMP successful login.
+"syslog,hordeimp,",FAILED LOGIN,Horde IMP Failed login.
+"syslog,imapd,",Login failed user=|AUTHENTICATE LOGIN failure,Imapd user login failed.
+"syslog,imapd,",Authenticated user=,Imapd user login.
+"syslog,imapd,",Logout user=,Imapd user logout.
+"syslog,mailscanner,",^Phishing bad sites list updated,ignore
+"mcafee,",The file \.+ contain|infected with|User defined detection|scan found|error attempting to clean,McAfee Windows AV - Virus detected and not removed.
+"mcafee,",quarantined|moved to quarantine|file was deleted|deleted successfully|has been deleted|message deleted|deleted after|cleaned|successfully deleted,McAfee Windows AV - Virus detected and properly removed.
+"mcafee,",Will be deleted,McAfee Windows AV - Virus detected and file will be deleted.
+"mcafee,",scan started|scan stopped,McAfee Windows AV - Scan started or stopped.
+"mcafee,",completed.  No detections,McAfee Windows AV - Scan completed with no viruses found.
+"mcafee,",scan was cancelled |has taken too long,McAfee Windows AV - Virus scan cancelled.
+"mcafee,",scan was canceled because,McAfee Windows AV - Virus scan cancelled due to shutdown.
+"mcafee,",update was successful,McAfee Windows AV - Virus program or DAT update succeeded.
+"mcafee,",update failed,McAfee Windows AV - Virus program or DAT update failed.
+"mcafee,",update was cancelled,McAfee Windows AV - Virus program or DAT update cancelled.
+"mcafee,",contains the EICAR test file,McAfee Windows AV - EICAR test file detected.
+"windows,mse,",Virus:DOS/EICAR_Test_File,Microsoft Security Essentials - EICAR test file detected.
+"windows,",unexpected shutdown,Unexpected Windows shutdown.
+"windows,",ID:\s+\p*S-1-5-32-544,Administrators Group Changed
+"windows,",ID:\s+%{S-1-1-0},Everyone Group Changed
+"windows,",ID:\s+%{S-1-5-9},Enterprise Domain Controllers Group Changed
+"windows,",ID:\s+%{S-1-5-11},Authenticated Users Group Changed
+"windows,",ID:\s+%{S-1-5-13},Terminal Server Users Group Changed
+"windows,",ID:\s+%{S-1-5-21\S+-512},Domain Admins Group Changed
+"windows,",ID:\s+%{S-1-5-21\S+-513},Domain Users Group Changed
+"windows,",Target Account Name: None,Local User Group NONE
+"windows,",ID:\s+%{S-1-5-21\S+-514},Domain Guests Group Changed
+"windows,",ID:\s+%{S-1-5-21\S+-515},Domain Computers Group Changed
+"windows,",ID:\s+%{S-1-5-21\S+-516},Domain Controllers Group Changed
+"windows,",ID:\s+%{S-1-5-21\S+-517},Cert Publishers Group Changed
+"windows,",ID:\s+%{S-1-5-21\.+-518},Schema Admins Group Changed
+"windows,",ID:\s+%{S-1-5-21\S+-519},Enterprise Admins Group Changed
+"windows,",ID:\s+%{S-1-5-21\S+-520},Group Policy Creator Owners Group Changed
+"windows,",\w* ID:\s+%{S-1-5-21\S+-553},RAS and IAS Servers Group Changed
+"windows,",ID:\s+%{S-1-5-32-545},Users Group Changed
+"windows,",ID:\s+%{S-1-5-32-546},Guests Group Changed
+"windows,",ID:\s+%{S-1-5-32-547},Power Users Group Changed
+"windows,",ID:\s+%{S-1-5-32-548},Account Operators Group Changed
+"windows,",ID:\s+%{S-1-5-32-549},Server Operators Group Changed
+"windows,",\w* ID:\s+%{S-1-5-32-550},Print Operators Group Changed
+"windows,",ID:\s+%{S-1-5-32-551},Backup Operators Group Changed
+"windows,",ID:\s+%{S-1-5-32-552},Replicators Group Changed
+"windows,",ID:\s+%{S-1-5-32-554},Pre-Windows 2000 Compatible Access Group Changed
+"windows,",ID:\s+%{S-1-5-32-555},Remote Desktop Users Group Changed
+"windows,",ID:\s+%{S-1-5-32-556},Network Configuration Operators Group Changed
+"windows,",ID:\s+%{S-1-5-32-557},Incoming Forest Trust Builders Group Changed
+"windows,",ID:\s+%{S-1-5-32-558},Performance Monitor Users Group Changed
+"windows,",ID:\s+%{S-1-5-32-559},Performance Log Users Group Changed
+"windows,",ID:\s+%{S-1-5-32-560},Windows Authorization Access Group Changed
+"windows,",ID:\s+%{S-1-5-32-561},Terminal Server License Servers Group Changed
+"windows,",ID:\s+%{S-1-5-32-562},Distributed COM Users Group Changed
+"windows,",ID:\s+%{S-1-5-\s*21\.+\s*-498},Enterprise Read-only Domain Controllers Group Changed
+"windows,",ID:\s+%{S-1-5-\s*21\.+\s*-529},Read-only Domain Controllers Group Changed
+"windows,",ID:\s+%{S-1-5-32-569},Cryptographic Operators Group Changed
+"windows,",ID:\s+%{S-1-5-\s*21\.+\s*-571},Allowed RODC Password Replication Group Changed
+"windows,",ID:\s+%{S-1-5-\s*21\.+\s*-572},Denied RODC Password Replication Group Changed
+"windows,",ID:\s+%{S-1-5-32-573},Event Log Readers Group Changed
+"windows,",ID:\s+%{S-1-5-32-574},Certificate Service DCOM Access Group Changed
+"windows,",Failure Code: 0x1F,"['Windows DC integrity check on decrypted', 'field failed.']"
+"windows,",Failure Code: 0x22,Windows DC - Possible replay attack.
+"windows,",Failure Code: 0x25,Windows DC - Clock skew too great.
+"windows,",Logon Type:   8,MS Exchange Logon Success.
+"windows,",Logon Type:   8,User Logoff Exchange.
+"windows,",chromoting,Chrome Remote Desktop attempt - access denied
+"windows,",chromoting,Chrome Remote Desktop attempt - connected
+"windows,",chromoting,Chrome Remote Desktop attempt - disconnected
+"mysql_log,",^MySQL log: \d+ \S+ \d+ Connect,Database authentication success.
+"mysql_log,",Access denied for user,Database authentication failure.
+"mysql_log,",^MySQL log: \d+ \S+ \d+ Query,Database query.
+"mysql_log,",^MySQL log: \d+ \S+ \d+ Quit,User disconnected from database.
+"mysql_log,",mysqld ended|Shutdown complete,Database shutdown message.
+"mysql_log,",mysqld started|mysqld restarted,Database startup message.
+"mysql_log,",^MySQL log: \d+ \S+ \d+ [ERROR],Database error.
+"mysql_log,",Fatal error:,Database fatal error.
+"syslog,named,",dropping source port zero packet from,Invalid DNS packet. Possibility of attack.
+"syslog,named,",denied AXFR from,Failed attempt to perform a zone transfer.
+"syslog,named,",denied update from|unapproved update from,"['DNS update denied.', 'Generally mis-configuration.']"
+"syslog,named,",unable to rename log file,Log permission misconfiguration in Named.
+"syslog,named,",unexpected RCODE,Unexpected error while resolving domain.
+"syslog,named,",refused notify from non-master,DNS configuration error.
+"syslog,named,",update \S+ denied,DNS update using RFC2136 Dynamic protocol.
+"syslog,named,",query (cache) denied|: query (cache),Query cache denied (probably config error).
+"syslog,named,",exiting (due to fatal error),Named fatal error. DNS service going down.
+"syslog,named,","['^zone \\S+ serial number \\S+ received from master', '\\S+ \\S ours (\\S+)']","['Serial number from master is lower', 'than stored.']"
+"syslog,named,",^transfer of \S+ from \S+ failed while receiving \S+ REFUSED,Unable to perform zone transfer.
+"syslog,named,",^zone \S+: expired,Zone transfer error.
+"syslog,named,",zone transfer deferred due to quota,Zone transfer deferred.
+"syslog,named,",bad owner name (check-names),Hostname contains characters that check-names does not like.
+"syslog,named,",loaded serial|transferred serial,Zone transfer.
+"syslog,named,","['syntax error near|', 'reloading configuration failed: unexpected token']",Syntax error in a named configuration file.
+"syslog,named,",refresh: retry limit for master \S+ exceeded,Zone transfer rety limit exceeded
+"syslog,named,",already exists previous definition,Zone has been duplicated.
+"syslog,named,",starting BIND,BIND has been started
+"syslog,named,",has no address records,Missing A or AAAA record
+"syslog,named,",zone \S+: \(master\) removed,Zone has been removed from a master server
+"syslog,named,",loading from master file \S+ failed: not at top of zone$,Origin of zone and owner name of SOA do not match.
+"syslog,named,",already exists previous definition,Zone has been duplicated
+"syslog,named,",reloading configuration failed: unexpected end of input,BIND Configuration error.
+"syslog,named,",zone \S+: \(master\) removed,Zone has been removed from a master server
+"syslog,named,",loading from master file \S+ failed: not at top of zone$,Origin of zone and owner name of SOA do not match.
+"syslog,named,","['^transfer of|', 'AXFR started$']",Zone transfer.
+"syslog,named,",failed to connect: connection refused,"Zone transfer failed, unable to connect to master."
+"syslog,named,",IPv6 interfaces failed,Could not listen on IPv6 interface.
+"syslog,named,",failed; interface ignored,Could not bind to an interface.
+"syslog,named,",failed while receiving responses: not authoritative,Master is not authoritative for zone.
+"syslog,named,",open: \S+: permission denied$,"Could not open configuration file, permission denied."
+"syslog,named,",loading configuration: permission denied,"Could not open configuration file, permission denied."
+"syslog,named,",IN SOA -E,Domain in SOA -E.
+"syslog,named,",failed to connect: host unreachable,Master appears to be down.
+"syslog,named,",IN AXFR -,Domain is queried for a zone transferred.
+"syslog,named,",IN A +,Domain A record found.
+"syslog,named,",client \S+: bad zone transfer request: \S+: non-authoritative zone \(NOTAUTH\),Bad zone transfer request.
+"syslog,named,",refresh: failure trying master,Cannot refresh a domain from the master server.
+"syslog,named,",SOA record not at top of zone,Origin of zone and owner name of SOA do not match.
+"syslog,named,",command channel listening on,named command channel is listening.
+"syslog,named,",automatic empty zone,named has created an automatic empty zone.
+"syslog,named,",reloading configuration failed: out of memory,Server does not have enough memory to reload the configuration.
+"syslog,named,",zone transfer \S+ denied,zone transfer denied
+"syslog,named,",error sending response: host unreachable$,Cannot send a DNS response.
+"syslog,named,",update forwarding \.+ denied$,Cannot update forwarding domain.
+"syslog,named,",: parsing failed$,Parsing of a configuration file has failed.
+"netscreenfw,",SYN flood!,netscreen detected a SYN flood.
+"apache,",^\S+ \S+ [error],Nginx error message.
+"apache,",^\S+ \S+ [warn],Nginx warning message.
+"apache,",^\S+ \S+ [crit],Nginx critical message.
+"apache,",failed (2: No such file or directory)|is not found (2: No such file or directory),Server returned 404 (reported in the access.log).
+"apache,",accept() failed (53: Software caused connection abort),Incomplete client request.
+"apache,",no user/password was provided for basic authentication,Initial 401 authentication request.
+"apache,","password mismatch, client| was not found in",Web authentication failed.
+"apache,",failed (2: No such file or directory,Common cache error when files were removed.
+"apache,",failed (36: File name too long),"Invalid URI, file name too long."
+"syslog,dns,nsd,",unrecognized RR type,Syntax error in nsd configuration.
+"syslog,dns,nsd,",server initialization failed|syntax error$,Syntax error in nsd configuration.
+"syslog,dns,nsd,",^NSTATS|^XSTATS,nsd statistics
+"syslog,dns,nsd,",Can't bind,Cannot bind to a socket.
+"syslog,dns,nsd,",nsd is already running,nsd is already running.
+"syslog,dns,nsd,",received notify response error NOT IMPL,Notify is not implemented.
+"syslog,dns,nsd,",read with \d+ errors$,Zone file read with errors.
+"syslog,dns,nsd,",received error code,Error grouping.
+"syslog,dns,nsd,",NOT IMPL,Zone xfer not implemented.
+"syslog,dns,nsd,",tcp: Connection reset by peer$,tcp connection reset.
+"syslog,dhcpd,",^DHCPREQUEST|^DHCPOFFER |^DHCPDISCOVER|^DHCPACK,Normal dhcp.
+"syslog,dhcpd,",answers a ping after sending a release|Possible release spoof,A host issued a release but is responding to pings.
+"syslog,dhcpd,","['expecting left brace.$|', 'fixed-address parameter not allowed here.$|', 'parameters not allowed after first declaration.$|', 'Configuration file errors encountered']",Configuration errors.
+"syslog,dhcpd,",exiting.$,dhcpd is exiting.
+"syslog,dhcpd,",Can't listen on,dhcpd cannot listen to an interface.
+"syslog,dhcpd,",has no subnet declaration for,dhcpd is not configured to listen to an interface.
+"syslog,dhcpd,",Listening on,dhcpd has been started.
+"syslog,dhcpd,",^Address range,Message with address range.
+"syslog,dhcpd,",not on net,Defined address range is not on the configured network.
+"syslog,dhcpd,",^no free leases,DHCP server has run out of leases.
+"syslog,dhcpd,",^already acking lease,Multiple acks.
+"local,syslog,openbsd",,Grouping of bsd_kernel alerts
+"local,syslog,openbsd","ichiic0: abort failed, status 0x40",A timeout occurred waiting for a transfer.
+"local,syslog,openbsd",Check Condition (error 0x70) on opcode 0x0,Check media in optical drive.
+"local,syslog,openbsd",BBB bulk-in clear stall failed,A disk has timed out.
+"local,syslog,openbsd",arp info overwritten for,arp info has been overwritten for a host
+"local,syslog,openbsd",was not properly unmounted,"A filesystem was not properly unmounted, likely system crash"
+"local,syslog,openbsd",UKC> quit,"UKC was used, possibly modifying a kernel at boot time."
+"local,syslog,openbsd",Michael MIC failure,Michael MIC failure: Checksum failure in the tkip protocol.
+"local,syslog,openbsd",soft error (corrected),"['A soft error has been corrected on a hard drive,', 'this is a possible early sign of failure.']"
+"local,syslog,openbsd",unknown event,Unknown acpithinkpad event
+"local,syslog,openbsd","Critical temperature, shutting down",System shutdown due to temperature
+"local,syslog,openbsd",_AL0[0] _PR0 failed,Unknown ACPI event (bug 6299 in OpenBSD bug tracking system).
+"local,syslog,openbsd","ehci_freex: xfer=0xffff8000003ef800 not busy, 0x4f4e5155",USB diagnostic message.
+"local,syslog,openbsd","ichiic0: abort failed, status 0x0",Possible APM or ACPI event.
+"local,syslog,openbsd",Filesystem is not clean - run fsck,"Unclean filesystem, run fsck."
+"local,syslog,openbsd","atascsi_passthru_done, timeout",Timeout in atascsi_passthru_done.
+"local,syslog,openbsd",,Clock battery error 80
+"local,syslog,openbsd",i/o error on block,I/O error on a storage device
+"local,syslog,openbsd",kbc: cmd word write error,kbc error.
+"local,syslog,openbsd","BBB reset failed, IOERROR","USB reset failed, IOERROR."
+"local,syslog,openbsd",,Grouping for groupdel rules.
+"local,syslog,openbsd",group deleted,Group deleted.
+"local,syslog,openbsd",no core dump,No core dumps.
+"local,syslog,openbsd",rebooted by,System was rebooted.
+"local,syslog,openbsd",proxy cannot connect to server,ftp-proxy cannot connect to a server.
+"local,syslog,openbsd",uncorrectable data error reading fsbn,Hard drive is dying.
+"local,syslog,openbsd",^carp,CARP master to backup.
+"local,syslog,openbsd",duplicate IP6 address,Duplicate IPv6 address.
+"local,syslog,openbsd",failed loadfirmware of file,Could not load a firmware.
+"local,syslog,openbsd",Permission denied$,hotplugd could not open a file.
+"local,syslog,openbsd",user removed: name=,User account deleted.
+"local,syslog,openbsd",bad peer from,Bad ntp peer.
+"local,syslog,openbsd",receive_packet failed on,dhclient receive_packet failed.
+"local,syslog,openbsd",Input/output error$,dhclient receive_packet failed due to I/O error.
+"local,syslog,openbsd",SIOCDIFADDR failed,SIOCDIFADDR failed
+"local,syslog,openbsd",Device not configured$,dhclient: device not configured.
+"local,syslog,openbsd,doas",,doas grouping
+"local,syslog,openbsd,doas",cannot stat,doas cannot stat a file.
+"local,syslog,openbsd,doas",: Permission denied$,doas cannot stat a file due to permissions.
+"local,syslog,openbsd,doas",path not secure$,A critical path for doas does not have secure permissions.
+"local,syslog,openbsd,doas",failed command for,Failed doas command.
+"local,syslog,openbsd,doas",ran command,A command was run using doas.
+"local,syslog,openbsd,doas",as root,A doas command was run as root.
+"local,syslog,openbsd,doas",failed auth for,doas authentication failed.
+"local,syslog,openbsd,doas",^dropped,sendsyslog dropped log messages.
+"syslog,smtpd,",New session,New session created.
+"syslog,smtpd,",Closing session,Session closed.
+"syslog,smtpd,",delivery: Ok,Email delivered.
+"syslog,smtpd,",Command not supported$,SMTP command not supported.
+"syslog,smtpd,",IO error: No SSL error$,OpenSMTPd: no SSL
+"syslog,smtpd,",Server certificate verification failed,Server TLS certificate verification failed.
+"ossec,",Agent started,New ossec agent connected.
+"ossec,",Ossec started,Ossec server started.
+"ossec,",Agent started,Ossec agent started.
+"ossec,",Agent disconnected,Ossec agent disconnected.
+"ossec,",^NTFS Alternate data stream found,Ignored common NTFS ADS entries.
+"ossec,",^Windows Audit,Windows Audit event.
+"ossec,",^Windows Malware,Windows malware detected.
+"ossec,",^Application Found,Windows application monitor event.
+"ossec,","['^Starting rootcheck scan|^Ending rootcheck scan.|', '^Starting syscheck scan|^Ending syscheck scan.']",Ignoring rootcheck/syscheck scan messages.
+"ossec,",^System Audit,System Audit event.
+"ossec,",Adware|Spyware,Windows Adware/Spyware application found.
+"ossec,",^System Audit: Web vulnerability,System Audit: Vulnerable web application found.
+"ossec,",^ossec: output:,OSSEC process monitoring rules.
+"ossec,",ossec: output: 'df -P': /dev/,Partition usage reached 100% (disk space monitor).
+"ossec,",cdrom|/media|usb|/mount|floppy|dvd,Ignoring external medias.
+"ossec,",ossec: output: 'netstat -tan,Listened ports status (netstat) changed (new port opened or closed).
+"ossec,",ossec: output: 'w',List of logged in users. It will not be alerted by default.
+"ossec,",ossec: output: 'last -n,List of the last logged in users.
+"ossec,",^ossec: agentless:,Integrity checksum for agentless device changed.
+"ossec,",^ossec: File rotated,Log file rotated.
+"ossec,",^ossec: File size reduced,Log file size reduced.
+"ossec,",^ossec: Event log cleared,Microsoft Event log cleared.
+"ossec,",INFO:,Ignore informational messages (usually at startup)
+"syslog,owncloud,",Login failed:,ownCloud authentication failed.
+"syslog,owncloud,","Passed filename is not valid, might be malicious",ownCloud possible malicious request.
+"pam,syslog,",session opened for user,Login session opened.
+"pam,syslog,",session closed for user,Login session closed.
+"pam,syslog,",authentication failure; logname=,User login failed.
+"pam,syslog,",check pass; user unknown,Attempt to login with an invalid user.
+"pam,syslog,",^pam_unix(cron:session): session opened for user,Ignoring Annoying Ubuntu/debian cron login events.
+"pam,syslog,",^pam_unix(cron:session): session closed for user,Ignoring Annoying Ubuntu/debian cron login events.
+"pam,syslog,",^pam_unix\S+: check pass; user unknown$,Ignoring events with a user or a password.
+"pam,syslog,",gdm:auth): conversation failed,PAM and gdm are not playing nicely.
+"pam,syslog,",cannot open shared object file: No such file or directory,PAM misconfiguration.
+"pam,syslog,",illegal module type:,PAM misconfiguration.
+"pam,syslog,",: password changed for,User changed password.
+"pam,syslog,",password check failed,Password check failed.
+"apache,",PHP Warning:,PHP Warning message.
+"apache,",PHP Fatal error:,PHP Fatal error.
+"apache,",PHP Parse error:,PHP Parse error.
+"apache,",^PHP Warning:,PHP Warning message.
+"apache,",^PHP Fatal error:,PHP Fatal error.
+"apache,",^PHP Parse error:,PHP Parse error.
+"apache,","expects parameter 1 to be string, array given in",PHP web attack.
+"apache,",Failed opening|failed to open stream,PHP internal error (missing file).
+"apache,","bytes written, possibly out of free disk space in",PHP internal error (server out of space).
+"apache,",Failed opening required |Call to undefined function,PHP internal error (missing file or function).
+"syslog,pix,",Failed|Lost Failover,Firewall failover pair communication problem.
+"syslog,postfix,",blocked using,IP Address black-listed by anti-spam (blocked).
+"syslog,postfix,","['defer service failure|Resource temporarily unavailable|', '^fatal: the Postfix mail system is not running']",Postfix process error.
+"syslog,postfix,",authentication failed,Postfix SASL authentication failure.
+"syslog,postfix,",^daemon started,Postfix started.
+"syslog,postfix,",^terminating on signal,Postfix stopped.
+"syslog,postfix,",^clamsmtpd:,Grouping of the clamsmtpd rules.
+"postgresql_log,",duration: | statement:,Database query.
+"postgresql_log,",connection authorized,Database authentication success.
+"postgresql_log,",authentication failed,Database authentication failure.
+"postgresql_log,",terminating connection due,Database shutdown message.
+"postgresql_log,",aborting any active transactions|shutting down,Database shutdown message.
+"syslog,proftpd,",FTP session opened.$,FTP session opened.
+"syslog,proftpd,",FTP session closed.$,FTP session closed.
+"syslog,proftpd,",no such user,Attempt to login using a non-existent user.
+"syslog,proftpd,",Incorrect password.$|Login failed,Login failed accessing the FTP server
+"syslog,proftpd,",Login successful,FTP Authentication success.
+"syslog,proftpd,",Connection from \S+ [\S+] denied,Connection denied by ProFTPD configuration.
+"syslog,proftpd,",refused connect from,Connection refused by TCP Wrappers.
+"syslog,proftpd,",unable to find open port in PassivePorts range,"['Small PassivePorts range in config file.', 'Server misconfiguration.']"
+"syslog,proftpd,",Refused PORT,"[""Attempt to bypass firewall that can't adequately"", 'keep state of FTP traffic.']"
+"syslog,proftpd,",Maximum login attempts,Multiple failed login attempts.
+"syslog,proftpd,",host name/name mismatch|host name/address mismatch,Mismatch in server's hostname.
+"syslog,proftpd,",warning: can't verify hostname:,Reverse lookup error (bad ISP config).
+"syslog,proftpd,",connect from,Remote host connected to FTP server.
+"syslog,proftpd,","FTP no transfer timeout, disconnected",Remote host disconnected due to inactivity.
+"syslog,proftpd,","FTP login timed out, disconnected",Remote host disconnected due to login time out.
+"syslog,proftpd,","FTP session idle timeout, disconnected",Remote host disconnected due to time out.
+"syslog,proftpd,",Data transfer stall timeout:,Data transfer stalled.
+"syslog,proftpd,",ProFTPD terminating (signal 11),FTP process crashed.
+"syslog,proftpd,",Reallocating sreaddir buffer,FTP server Buffer overflow attempt.
+"syslog,proftpd,",listen() failed in,Unable to bind to adress.
+"syslog,proftpd,","['error setting IPV6_V6ONLY: Protocol not available|', '- mod_delay/|PAM(setcred): System error|', 'PAM(close_session): System error|cap_set_proc failed|reverting to normal operation|error retrieving information about user']",IPv6 error and mod-delay info (ignored).
+"syslog,proftpd,",unable to open incoming connection,"[""Couldn't open the incoming connection."", 'Check log message for reason.']"
+"syslog,proxmox-ve,",authentication failure;,Proxmox VE authentication failed.
+"syslog,proxmox-ve,",successful auth for user,Proxmox VE authentication succeeded.
+"syslog,psad,",scan detected,PSAD group scan detected
+"syslog,psad,",added iptables,PSAD group added iptables
+"syslog,psad,",DL: 4|DL: 5,PSAD portscan
+"syslog,psad,",auto-block against,PSAD auto-block
+"syslog,psad,",DL: 3,PSAD level 3 warning
+"syslog,psad,",signature match:,PSAD signature match
+"syslog,pure-ftpd,",[INFO] New connection from,New FTP connection.
+"syslog,pure-ftpd,",[WARNING] Authentication failed for user,FTP Authentication failed.
+"syslog,pure-ftpd,",[INFO] Logout| [INFO] Timeout,FTP user logout/timeout
+"syslog,pure-ftpd,",[NOTICE],FTP notice messages
+"syslog,pure-ftpd,",[INFO] Can't change directory to,Attempt to access invalid directory
+"syslog,pure-ftpd,",[INFO] \S+ is now logged in| is now logged in,FTP Authentication success.
+"syslog,pure-ftpd,",[INFO] New connection from,New FTP connection.
+"syslog,pure-ftpd,",[WARNING] Authentication failed for user,FTP Authentication failed.
+"syslog,pure-ftpd,",[INFO] Logout| [INFO] Timeout,FTP user logout/timeout
+"syslog,pure-ftpd,",[NOTICE],FTP notice messages
+"syslog,pure-ftpd,",[INFO] Can't change directory to,Attempt to access invalid directory
+"syslog,pure-ftpd,",[INFO] \S+ is now logged in,FTP Authentication success.
+"syslog,racoon,",ISAKMP-SA established,VPN established.
+"syslog,racoon,",such policy does not already exist,Roadwarrior configuration (ignored error).
+"syslog,racoon,",ignore INITIAL-CONTACT notification,Roadwarrior configuration (ignored warning).
+"syslog,racoon,",ERROR: invalid attribute|ERROR: rejected,Invalid configuration settings (ignored error).
+"syslog,roundcube,",failed (LOGIN)| Login failed | Authentication failed| Failed login,Roundcube authentication failed.
+"syslog,roundcube,",Successful login,Roundcube authentication succeeded.
+"syslog,sendmail,",reject=,Grouping of the sendmail reject rules.
+"syslog,sendmail,",reject=451 4.1.8,"['Sender domain does not have any valid', 'MX record (Requested action aborted).']"
+"syslog,sendmail,",reject=550 5.0.0 |reject=553 5.3.0,"['Rejected by access list', '(55x: Requested action not taken).']"
+"syslog,sendmail,",reject=550 5.7.1,"['Attempt to use mail server as relay', '(550: Requested action not taken).']"
+"syslog,sendmail,",reject=553 5.1.8,"['Sender domain is not found', '(553: Requested action not taken).']"
+"syslog,sendmail,",reject=553 5.5.4,"['Sender address does not have domain', '(553: Requested action not taken).']"
+"syslog,sendmail,",rejecting commands from,Sendmail rejected due to pre-greeting.
+"syslog,sendmail,",savemail panic,Sendmail save mail panic.
+"syslog,sendmail,",^sender check failed|^sender check tempfailed,"['SMF-SAV sendmail milter unable to verify', 'address (REJECTED).']"
+"syslog,smbd,",getpeername failed. Error was Transport endpoint,Samba network problems.
+"syslog,smbd,",Denied connection from|Connection denied from,Samba connection denied.
+"syslog,smbd,",Connection reset by peer,Samba network problems.
+"syslog,smbd,",Permission denied--,User action denied by configuration.
+"syslog,smbd,",Unable to connect to CUPS server,Samba network problems (unable to connect).
+"syslog,smbd,",smbd is already running,An attempt has been made to start smbd but the process is already running.
+"syslog,smbd,",nmbd is already running,An attempt has been made to start nmbd but the process is already running.
+"syslog,smbd,",Connection denied from,Connection was denied.
+"syslog,smbd,",Socket is not connected,"Socket is not connected, write failed."
+"syslog,smbd,",gvfsd-smb,Segfault in gvfs-smb.
+"syslog,solaris_bsm,",^login,Login session succeeded.
+"syslog,solaris_bsm,",^login,Login session failed.
+"syslog,solaris_bsm,",^su,User successfully changed UID.
+"syslog,solaris_bsm,",^su,User failed to change UID (user id).
+"syslog,spamd,",^spamd,Grouping for the spamd rules
+"syslog,spamd,",: result:,SPAMD result message (not very usefull here).
+"syslog,spamd,",checking message | processing message,Spamd debug event (reading message).
+"syslog,sshd,",Bad protocol version identification,"['Possible attack on the ssh server', '(or version gathering).']"
+"syslog,sshd,",^reverse mapping,Reverse lookup error (bad ISP or attack).
+"syslog,sshd,",fatal: Timeout before authentication for,Timeout while logging in (sshd).
+"syslog,sshd,",Did not receive identification string from,SSH insecure connection attempt (scan).
+"syslog,sshd,",fatal: buffer_get_string: bad string,OpenSSH challenge-response exploit.
+"syslog,sshd,","['error: Could not get shadow information for NOUSER|', 'fatal: Read from socket failed: |error: ssh_msg_send: write|', ""^syslogin_perform_logout: |^pam_succeed_if(sshd:auth): error retrieving information about user|can't verify hostname: getaddrinfo""]",Useless SSHD message without an user/ip and context.
+"syslog,sshd,",illegal user|invalid user,Attempt to login using a non-existent user
+"syslog,sshd,","['authentication failure; logname= uid=0 euid=0 tty=ssh|', 'input_userauth_request: invalid user|', 'PAM: User not known to the underlying authentication module for illegal user|', 'error retrieving information about user']",Useless/Duplicated SSHD message without a user/ip.
+"syslog,sshd,",Corrupted check bytes on,Corrupted bytes on SSHD.
+"syslog,sshd,",Local: crc32 compensation attack,SSH CRC-32 Compensation attack
+"syslog,sshd,",^Accepted|authenticated.$,SSHD authentication success.
+"syslog,sshd,",^Failed|^error: PAM: Authentication,SSHD authentication failed.
+"syslog,sshd,",error: Bad prime description in line,SSHD configuration error (moduli).
+"syslog,sshd,",not allowed because,Attempt to login using a denied user.
+"syslog,sshd,",Received disconnect from,System disconnected from sshd.
+"syslog,sshd,",Connection closed,ssh connection closed.
+"syslog,sshd,",error: buffer_get_bignum2_ret: negative numbers not supported,SSHD key error.
+"syslog,sshd,",fatal: buffer_get_bignum2: buffer error,SSHD key error.
+"syslog,sshd,",fatal: Write failed: Host is down,Host ungracefully disconnected.
+"syslog,sshd,",error: PAM: Module is unknown for,"Unknown PAM module, PAM misconfiguration."
+"syslog,sshd,",failed: Address already in use.,Attempt to start sshd when something already bound to the port.
+"syslog,sshd,",Authentication service cannot retrieve user credentials,Authentication services were not able to retrieve user credentials.
+"syslog,sshd,",debug1: attempt,Debug message.
+"syslog,sshd,",error: connect to \S+ port \d+ failed: Connection refused,SSHD is not accepting connections.
+"syslog,sshd,",AKASSH_Version_Mapper1.,SSH Scanning.
+"syslog,sshd,",error: connect_to,Possible port forwarding failure.
+"syslog,sshd,",Invalid credentials,User entered incorrect password.
+"syslog,sshd,",Could not load host key,sshd could not load one or more host keys.
+"syslog,sshd,",Write failed: Broken pipe,Failed write due to one host disappearing.
+"syslog,sshd,","['^error: setsockopt SO_KEEPALIVE: Connection reset by peer$|', '^error: accept: Software caused connection abort$']",Connection reset or aborted.
+"syslog,sshd,",^fatal: Cannot bind any address.$,sshd cannot bind to configured address.
+"syslog,sshd,",set_loginuid failed opening loginuid$,pam_loginuid could not open loginuid.
+"syslog,sshd,",^error: Could not stat AuthorizedKeysCommand,SSHD configuration error (AuthorizedKeysCommand)
+"syslog,sshd,",Connection reset by peer$,ssh connection reset by peer
+"syslog,sshd,",Connection refused$,ssh connection refused
+"syslog,sshd,",Connection timed out$,ssh connection timed out
+"syslog,sshd,",No route to host$,ssh no route to host
+"syslog,sshd,",failure direct-tcpip$,ssh port forwarding issue
+"syslog,sshd,",Transport endpoint is not connected$,ssh transport endpoint is not connected
+"syslog,sshd,",get_remote_port failed$,ssh get_remote_port failed
+"syslog,sshd,",bad client public DH value,ssh bad client public DH value
+"syslog,sshd,",Corrupted MAC on input.,ssh corrupted MAC on input
+"syslog,sshd,",^Bad packet length,ssh bad packet length
+"syslog,sshd,",Unable to negotiate with |Unable to negotiate a key,sshd could not negotiate with client.
+"syslog,sshd,",no hostkey alg [preauth],No hostkey alg.
+"syslog,sshd,",no matching key exchange method found.|Unable to negotiate a key exchange method,Client did not offer an acceptable key exchange method.
+"syslog,sshd,",no matching cipher found.,"sshd could not negotiate with client, no matching cipher."
+"syslog,sshd,",Failed to create session:,sshd failed to create a session.
+"syslog,sshd,",bad ownership or modes for file,Authentication refused due to owner/permissions of authorized_keys.
+"syslog,sshd,","failed, subsystem not found$",sshd subsystem request failed.
+"syslog,sshd,",but this does not map back to the address - POSSIBLE BREAK-IN ATTEMPT!$,Bad DNS mapping.
+"syslog,sshd,",^error: maximum authentication attempts exceeded,Maximum authentication attempts exceeded.
+"syslog,errors,",^Couldn't open /etc/securetty,File missing. Root access unrestricted.
+"syslog,errors,",core_dumped|failure|error|attack| bad |illegal |denied|refused|unauthorized|fatal|failed|Segmentation Fault|Corrupted,Unknown problem somewhere in the system.
+"syslog,errors,",,Non standard syslog message (size too large).
+"syslog,errors,",^exiting on signal,Syslogd exiting (logging stopped).
+"syslog,errors,",^restart,Syslogd restarted.
+"syslog,errors,",,Syslogd restarted.
+"syslog,errors,",file system full|No space left on device,File system full.
+"syslog,errors,",killed by SIGTERM,Process exiting (killed).
+"syslog,errors,","[""terminated without error|can't verify hostname: getaddrinfo|"", 'PPM exceeds tolerance']",Ignoring known false positives on rule 1002..
+"syslog,errors,",segfault at,Process segfaulted.
+"syslog,nfs,",,NFS rules grouped.
+"syslog,nfs,",nfs: mount failure,Unable to mount the NFS share.
+"syslog,nfs,",reason given by server: Permission denied,Unable to mount the NFS directory.
+"syslog,nfs,",^rpc.mountd: refused mount request from,Unable to mount the NFS directory.
+"syslog,nfs,",,Automount informative message
+"syslog,xinetd,",^Deactivating service,Excessive number connections to a service.
+"syslog,access_control,","['FAILED LOGIN |authentication failure|', 'Authentication failed for|invalid password for|', 'LOGIN FAILURE|auth failure: |authentication error|', 'authinternal failed|Failed to authorize|', 'Wrong password given for|login failed|Auth: Login incorrect|', 'Failed to authenticate user']",User authentication failure.
+"syslog,access_control,",more authentication failures;|REPEATED login failures,User missed the password more than one time
+"syslog,access_control,",,Connection blocked by Tcp Wrappers.
+"syslog,access_control,",ILLEGAL ROOT LOGIN|ROOT LOGIN REFUSED,Illegal root login.
+"syslog,access_control,",^ROOT LOGIN  on,Physical root login.
+"syslog,access_control,",^Authentication passed,Pop3 Authentication passed.
+"syslog,access_control,",,OpenLDAP group.
+"syslog,access_control,",ACCEPT from,OpenLDAP connection open.
+"syslog,access_control,",RESULT tag=97 err=49,OpenLDAP authentication failed.
+"syslog,access_control,",,rshd messages grouped.
+"syslog,access_control,",^Connection from \S+ on illegal port$,Connection to rshd from unprivileged port. Possible network scan.
+"syslog,smartd,",,Pre-match rule for smartd.
+"syslog,smartd,",No configuration file /etc/smartd.conf found,Smartd Started but not configured
+"syslog,smartd,",Unable to register ATA device,Smartd configuration problem
+"syslog,smartd,",No such device or address,Device configured but not available to Smartd
+"syslog,linuxkernel,",,Pre-match rule for kernel messages
+"syslog,linuxkernel,","PCI: if you experience problems, try using option",Informative message from the kernel.
+"syslog,linuxkernel,",modprobe: Can't locate module sound,Informative message from the kernel
+"syslog,linuxkernel,",Oversized packet received from,"['Error message from the kernel.', 'Ping of death attack.']"
+"syslog,linuxkernel,",,Interface entered in promiscuous(sniffing) mode.
+"syslog,linuxkernel,","['end_request: I/O error, dev fd0, sector 0|', 'Buffer I/O error on device fd0, logical block 0']",Invalid request to /dev/fd0 (bug on the kernel).
+"syslog,linuxkernel,",svc: unknown program 100227 (me 100003),NFS incompatibility between Linux and Solaris.
+"syslog,linuxkernel,",svc: bad direction,NFS incompatibility between Linux and Solaris.
+"syslog,linuxkernel,",Out of Memory:,"['System running out of memory.', 'Availability of the system is in risk.']"
+"syslog,linuxkernel,","I/O error: dev |end_request: I/O error, dev",Kernel Input/Output error
+"syslog,linuxkernel,",Forged DCC command from,IRC misconfiguration
+"syslog,linuxkernel,",ipw2200: Firmware error detected.| ACPI Error,Kernel device error.
+"syslog,linuxkernel,",usbhid: probe of,Kernel usbhid probe error (ignored).
+"syslog,linuxkernel,",Kernel log daemon terminating,System is shutting down.
+"syslog,linuxkernel,",ADSL line is down,Monitor ADSL line is down.
+"syslog,linuxkernel,",ADSL line is up,Monitor ADSL line is up.
+"syslog,linuxkernel,",^hpiod: unable to ParDevice,Ignoring hpiod for producing useless logs.
+"syslog,cron,",,Crontab rule group.
+"syslog,cron,",^unable to exec,Wrong crond configuration
+"syslog,cron,",BEGIN EDIT,Crontab opened for editing.
+"syslog,cron,",REPLACE,Crontab entry changed.
+"syslog,cron,",^(root),Root's crontab entry changed.
+"syslog, su,",,Initial grouping for su messages.
+"syslog, su,",authentication failure; |failed|BAD su|^-,User missed the password to change UID (user id).
+"syslog, su,",,User missed the password to change UID to root.
+"syslog, su,",,User successfully changed UID to root.
+"syslog, su,",,User successfully changed UID.
+"syslog, su,",,First time (su) is executed by user.
+"syslog, su,",unknown class,A user has attempted to su to an unknown class.
+"syslog,tripwire,",Integrity Check failed: File could not,Problems with the tripwire checking
+"syslog,adduser",^new group,New group added to the system
+"syslog,adduser",^new user|^new account added,New user added to the system
+"syslog,adduser",^delete user|^account deleted|^remove group,Group (or user) deleted from the system
+"syslog,adduser",^changed user,Information from the user was changed
+"syslog,adduser",failed adding user,useradd failed.
+"syslog,sudo",,Initial group for sudo messages
+"syslog,sudo",incorrect password attempt,Failed attempt to run sudo
+"syslog,sudo",,Successful sudo to ROOT executed
+"syslog,sudo",,First time user executed sudo.
+"syslog,sudo",3 incorrect password attempts,Three failed attempts to run sudo
+"syslog,sudo",user NOT in sudoers,Unauthorized user attempted to use sudo.
+"syslog,pptp",,PPTPD messages grouped
+"syslog,pptp",,PPTPD failed message (communication error)
+"syslog,pptp",^tcflush failed: Bad file descriptor,PPTPD communication error
+"syslog,squid,",,Squid syslog messages grouped
+"syslog,squid,","['^ctx: enter level|^sslRead|^urlParse: Illegal |', '^httpReadReply: Request not yet |^httpReadReply: Excess data']",Squid debug message
+"syslog,dpkg,",^startup |^status |^remove |^configure |^install |^purge |^trigproc,Dpkg (Debian Package) log.
+"syslog,dpkg,",^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d install,New dpkg (Debian Package) requested to install.
+"syslog,dpkg,",^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d status installed,New dpkg (Debian Package) installed.
+"syslog,dpkg,","['^\\d\\d\\d\\d-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d remove|', '^\\d\\d\\d\\d-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d purge']",Dpkg (Debian Package) removed.
+"syslog,yum,",,Yum logs.
+"syslog,yum,",^Installed|^Updated|^Erased,Yum logs.
+"syslog,yum,",^Installed,New Yum package installed.
+"syslog,yum,",^Updated,Yum package updated.
+"syslog,yum,",^Erased,Yum package deleted.
+"syslog,yum,",,Grouping for the mptscrih rules.
+"syslog,yum,",,Grouping for the mptbase rules.
+"syslog,yum,",,Possible Disk failure. SCSI controller error.
+"syslog,yum,",,"SCSI RAID ARRAY ERROR, drive failed."
+"syslog,yum,",,SCSI RAID is now in a degraded status.
+"syslog,yum,",,NetworkManager grouping.
+"syslog,yum,",No chain/target/match by that name.$,Incorrect chain/target/match.
+"syslog,yum,",g_slice_set_config: assertion `sys_page_size == 0' failed,Uninteresting gnome error.
+"syslog,yum,",^nouveau,nouveau driver grouping
+"syslog,yum,",DATA_ERROR BEGIN_END_ACTIVE$| DATA_ERROR$,Uninteresting nouveau error.
+"syslog,yum,",^imuxsock begins to drop messages,rsyslog may be dropping messages due to rate-limiting.
+"local,systemd,",Stale file handle$,Stale file handle.
+"local,systemd,",Failed to get unit file state for,Failed to get unit state for service. This means that the .service file is missing
+"local,systemd,",entered failed state,"Service has entered a failed state, and likely has not started."
+"syslog,telnetd",telnetd,Grouping for the telnetd rules
+"syslog,telnetd",refused connect from,Connection refused by TCP Wrappers.
+"syslog,telnetd",: connect from,Remote host established a telnet connection.
+"syslog,telnetd",ttloop:  peer died:|ttloop:  read:,Remote host invalid connection.
+"syslog,telnetd",warning: can't verify hostname:,Reverse lookup error (bad hostname config).
+"syslog,unbound,",notice:,Notice grouping.
+"syslog,unbound,",info:,Info grouping.
+"syslog,unbound,",sendto failed: Can't assign requested address,Can't assign requested address.
+"syslog,unbound,",A IN$,DNS A request.
+"syslog,unbound,",AAAA IN$,DNS AAAA request.
+"syslog,vm-pop3d,",failed auth,Login failed accessing the pop3 server.
+"vmware,",logged in$,VMWare ESX authentication success.
+"vmware,",Failed login attempt for,VMWare ESX authentication failure.
+"vmware,",Accepted password for|login from,VMWare ESX user login.
+"vmware,",Rejected password for,VMWare ESX user authentication failure.
+"vmware,",-> VM_STATE_OFF,Virtual machine state changed to OFF.
+"vmware,",-> VM_STATE_POWERING_ON,Virtual machine being turned ON.
+"vmware,",-> VM_STATE_ON,Virtual machine state changed to ON.
+"vmware,",-> VM_STATE_RECONFIGURING,Virtual machine being reconfigured.
+"syslog,vpopmail,",password fail,Login failed for vpopmail.
+"syslog,vpopmail,",vpopmail user not found,Attempt to login to vpopmail with invalid username.
+"syslog,vpopmail,",null password given,Attempt to login to vpopmail with empty password.
+"syslog,vpopmail,",login success,Vpopmail successful login.
+"syslog,vsftpd,",CONNECT: Client,FTP session opened.
+"syslog,vsftpd,",OK LOGIN:,FTP Authentication success.
+"syslog,vsftpd,",FAIL LOGIN:,Login failed accessing the FTP server.
+"syslog,vsftpd,",OK UPLOAD:,FTP server file upload.
+"web,appsec,attack",POST /,WordPress Comment Spam (coming from a fake search engine UA).
+"web,appsec,attack","""GET \S+thumb.php?src=\S+.php",TimThumb vulnerability exploit attempt.
+"web,appsec,attack","""POST /\S+.php/login.php?cPath=",osCommerce login.php bypass attempt.
+"web,appsec,attack",/admin/\w+.php/login.php,osCommerce file manager login.php bypass attempt.
+"web,appsec,attack","""GET /\S+/cache/external\S+.php",TimThumb backdoor access attempt.
+"web,appsec,attack","""GET /\S+cart.php?\S+templatefile=../",Cart.php directory transversal attempt.
+"web,appsec,attack","""ZmEu""| ""libwww-perl/|""the beast""|""Morfeus|""ZmEu|""Nikto|""w3af.sourceforge.net|MJ12bot/v| Jorgee""|""Proxy Gear Pro|""DataCha0s",Blacklisted user agent (known malicious user agent).
+"web,appsec,attack","] ""POST \S+wp-login.php| ""POST /administrator",CMS (WordPress or Joomla) login attempt.
+"web,appsec,attack",""" ""Wget/",Blacklisted user agent (wget).
+"web,appsec,attack","""GET /\S+/uploadify.php?src=http://\S+.php",Uploadify vulnerability exploit attempt.
+"web,appsec,attack","""GET \S+/delete.php?board_skin_path=http://\S+.php",BBS delete.php exploit attempt.
+"web,appsec,attack","""GET \S+/shell.php?cmd=",Simple shell.php command execution.
+"web,appsec,attack","] ""POST",POST request received.
+"web,appsec,attack","""GET /\S+.php?\S+%00",Anomaly URL query (attempting to pass null termination).
+"web,accesslog,",%2Bchar\(\d+\)%2Bchar\(\d+\)%2Bchar\(\d+\)%2Bchar\(\d+\)%2Bchar\(\d+\)%2Bchar\(\d+\),"MSSQL Injection attempt (/ur.php, urchin.js)"
+"syslog,wordpress,",User authentication failed,Wordpress authentication failed.
+"syslog,wordpress,",User logged in,Wordpress authentication succeeded.
+"syslog,wordpress,",WPsyslog was successfully initiali,WPsyslog was successfully initialized.
+"syslog,wordpress,",Plugin deactivated,Wordpress plugin deactivated.
+"syslog,wordpress,",Warning: Comment flood attempt,Wordpress Comment Flood Attempt.
+"syslog,wordpress,",Warning: IDS:,Attack against Wordpress detected.
+"zeus,",^[\S+ \S+] INFO:|^[\S+ \S+] SSL:,Grouping of Zeus informational logs.
+"zeus,",^[\S+ \S+] WARN:,Zeus warning log.
+"zeus,",^[\S+ \S+] SERIOUS:,Zeus serious log.
+"zeus,",^[\S+ \S+] FATAL:,Zeus fatal log.
+"zeus,",admin:Authentication failure,Admin authentication failed.
+"zeus,",Unknown directive,Configuration warning (ignored).
