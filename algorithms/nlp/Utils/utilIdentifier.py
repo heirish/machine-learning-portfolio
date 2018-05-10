@@ -8,6 +8,9 @@ import re
 import ipaddress
 from urllib.parse import urlparse
 import spacy
+import base64
+from zhon import hanzi #for CJK punctuations
+import string
 
 ########################NOTE:typeName should all not begin or end with number, for datefinder bug##############################
 
@@ -53,6 +56,17 @@ URI_REGEX=re.compile(URI, re.IGNORECASE | re.MULTILINE | re.UNICODE | re.DOTALL 
 
 parser = spacy.load('en', disable=['parser', 'ner'])
 
+TERMINATERS = {'\n':'LINUX_NEWLINE',
+          '\r\n':'WINDOWS_NEWLINE',
+          '\s':'T_SPACE'}
+
+#words may contain -_
+#base64string include +=/
+#IP may include ./:
+#url may include /
+split_delimiter = re.sub('[\-_=\+\./:]', '', string.punctuation)
+split_delimiter += hanzi.punctuation
+    
 def formatTypeName(typeName):
     return "{}".format(typeName)
 
@@ -155,6 +169,79 @@ def identifySQLSelect(text, typeName="SQLSELECT_TYPE"):
         return replaced_text
     
     return text
+
+def isCommonEncoded(word):
+    return re.search('\d', word) and re.search("[a-z]", word, re.IGNORECASE)
+
+def isBase64(word):
+    if not isinstance(word ,str) or not word:
+        #raise ValueError("params s not string or None")
+        return False
+    if not isCommonEncoded(word):
+        return False
+    if word in parser.vocab:
+        return False
+
+    _base64_code = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+               'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+               'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a',
+               'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+               'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+               't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1',
+               '2', '3', '4','5', '6', '7', '8', '9', '+',
+               '/', '=' ]
+
+    # Check base64 OR codeCheck % 4
+    code_fail = [ i for i in word if i not in _base64_code]
+    if code_fail or len(word) % 4 != 0:
+        return False
+    
+    try:
+        return base64.b64encode(base64.b64decode(word)).decode() == word
+    except Exception as e:
+        #print(e)
+        pass
+    return False
+
+def identifyBase64(text, typeName="BASE64_TYPE"):
+    words = re.split("([{}])".format(split_delimiter), text)
+    
+    for i in range(len(words)):
+        if isBase64(words[i]):
+            words[i] = typeName
+    
+    return "".join(words)
+
+def identifyXML(text, typeName = "XML_TYPE"):
+    text = html.unescape(text)
+    start_pos = text.find("<")
+    end_pos = text.rfind(">")
+    
+    if start_pos == -1 or end_pos == -1 or end_pos < start_pos:
+        return text
+    while start_pos !=-1 and end_pos != -1 and end_pos > start_pos:
+        xml_str = text[start_pos:end_pos+1]
+        print("==========",start_pos, end_pos,"================",xml_str)
+        try:
+            root = ET.fromstring(xml_str)
+            if root.tag is not None:
+                text = text[:start_pos] + " {} ".format(typeName) + text[end_pos+1:]
+        except Exception as e:
+            print(e)
+            pass
+        start_pos = text.find("<", start_pos +1)
+        end_pos = text.rfind(">", 0, end_pos)
+        
+    return text
+#######################test#####################
+text = """허용되지 않는 입력 입니다. &lt;?xml version=&apos;1.0&apos; encoding=&apos;UTF-8&apos;?&gt; &lt;message type=&apos;request&apos; version=&apos;1.0.0&apos; &gt; &lt;/message&gt;"""
+#text = "this is not a html"
+#text = "<p>Hello World!</p>"
+#text = "<html><head><title>Title</title></head><body><p>Hello!</p></body></html>"
+#text = "start<html><head><title>Title</title></head><body><p>Hello!</p></body></html>end"
+#text = "start <html><head><title>Title</title></head><body><p>Hello!</p></body></html> end"
+print(identifyXML(text))
+###############################
     
 def isJavaStackTrace(text):
     #if re.search(r"Caused by:.*", text) \
