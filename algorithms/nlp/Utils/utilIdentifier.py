@@ -73,17 +73,20 @@ def formatTypeName(typeName):
 #########Caution:this will identify man numbers to wrong datetime
 ###seems set strict to True when call extract_date_string can resolve that prob
 def identifyDatetime(text, typeName="DATETIME_TYPE"):
-    finder = datefinder.DateFinder()
-    #print(finder.DATES_PATTERN)
-    finds = finder.extract_date_strings(text, strict=True)
-    for date_string, indices, captures in finds:
-        #print(date_string)
-        #print(indices)
-        #print(captures)
-        parsed_date = finder.parse_date_string(date_string, captures)
-        if parsed_date is not None:
-            #print(parsed_date)
-            text = text.replace(date_string, formatTypeName(typeName))
+    try:
+        finder = datefinder.DateFinder()
+        #print(finder.DATES_PATTERN)
+        finds = finder.extract_date_strings(text, strict=True)
+        for date_string, indices, captures in finds:
+            #print(date_string)
+            #print(indices)
+            #print(captures)
+            parsed_date = finder.parse_date_string(date_string, captures)
+            if parsed_date is not None:
+                #print(parsed_date)
+                text = text.replace(date_string, formatTypeName(typeName))
+    except Exception as e:
+        pass
     return text
 
 #not work well for logs, log differ from normal NLP
