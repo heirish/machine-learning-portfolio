@@ -11,6 +11,8 @@ import spacy
 import base64
 from zhon import hanzi #for CJK punctuations
 import string
+import html
+import xml.etree.ElementTree as ET
 
 ########################NOTE:typeName should all not begin or end with number, for datefinder bug##############################
 
@@ -243,7 +245,7 @@ text = """허용되지 않는 입력 입니다. &lt;?xml version=&apos;1.0&apos;
 #text = "<html><head><title>Title</title></head><body><p>Hello!</p></body></html>"
 #text = "start<html><head><title>Title</title></head><body><p>Hello!</p></body></html>end"
 #text = "start <html><head><title>Title</title></head><body><p>Hello!</p></body></html> end"
-print(identifyXML(text))
+#print(identifyXML(text))
 ###############################
     
 def isJavaStackTrace(text):
