@@ -1,4 +1,5 @@
-#ex.: python TopicLDA.py --input_data_dir Data_in --output_data_dir Data_out --max_steps 3 --year 2008
+# ex.: python TopicLDA.py --input_data_dir Data_in --output_data_dir Data_out --max_steps 3 --year 2008
+
 
 import re
 import os
@@ -9,6 +10,7 @@ import pyLDAvis
 import pyLDAvis.sklearn
 import argparse
 import spacy
+import warnings
 import multiprocessing
 import pandas as pd
 import numpy as np
@@ -19,6 +21,7 @@ from sklearn.decomposition import LatentDirichletAllocation
 from sklearn.feature_extraction.stop_words import ENGLISH_STOP_WORDS as stopwords
 from sklearn.feature_extraction.text import CountVectorizer
 
+
 from Utils import TextCleaner, TextVectorizer, Tools
 import importlib
 importlib.reload(TextCleaner)
@@ -28,11 +31,15 @@ importlib.reload(Tools)
 import matplotlib.pyplot as plt
 plt.rcParams["figure.figsize"] = [16,9]
 
+warnings.filterwarnings(action='once')
+warnings.filterwarnings('ignore')
+
+
 def cleanTextFunc(text):
-    #some data will raise NotImplementedError: subclasses of ParserBase must override error()
+    # some data will raise NotImplementedError: subclasses of ParserBase must override error()
     try:
         bs = BeautifulSoup(text, "html.parser")
-        #code = [s.extract() for s in bs('code')]
+        # code = [s.extract() for s in bs('code')]
         # replace other HTML symbols
         text = bs.get_text()
     except Exception as e:
@@ -51,17 +58,20 @@ def cleanTextFunc(text):
     text = text.encode("utf-8", "ignore").decode()
     return text
 
+
 parser = spacy.load('en', disable=['parser', 'ner'])
 punctuations = " ".join(string.punctuation).split(" ") + " ".join(hanzi.punctuation).split(" ")
-#only keep nouns and adjectives
+# only keep nouns and adjectives
+
+
 def tokenFunc(sentence):
     try:
         tokens = parser(sentence)
-        #only keep nouns
-        tokens = [tok for tok in tokens if (tok.tag_ in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
+        # only keep nouns
+        # tokens = [tok for tok in tokens if (tok.tag_ in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
         tokens = [tok.lemma_.lower().strip() if tok.lemma_ != "-PRON-" else tok.lower_ for tok in tokens]
         tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations)]
-        #remove tokens lenth is 1
+        # remove tokens lenth is 1
         tokens = [tok for tok in tokens if (len(tok)>1)]
         # remove large strings of whitespace
         while "" in tokens:
@@ -78,8 +88,9 @@ def tokenFunc(sentence):
         tokens=[]
     return tokens
 
+
 def tokenInChunks(data_in, n_jobs=1, n_chunks=1):
-    #split data_in into n_chunks parts
+    # split data_in into n_chunks parts
     # for multiprocessing 'i' format requires -2147483648 <= number <= 2147483647
     chunk_size = int(math.ceil(len(data_in) / n_chunks))
     tokenized_data = []
@@ -111,6 +122,7 @@ def tokenInChunks(data_in, n_jobs=1, n_chunks=1):
 #                print("pickleDump tokenized data Failed")
     return tokenized_data
 
+
 def trainLDA(data, n_topics, max_iterations):
     lda = LatentDirichletAllocation(n_components=n_topics,
                                     max_iter=max_iterations,
@@ -121,6 +133,7 @@ def trainLDA(data, n_topics, max_iterations):
                                     )
     lda.fit(data)
     return lda
+
 
 def trainLDAGridSearch(data, search_params):
     # Init the Model
@@ -133,6 +146,8 @@ def trainLDAGridSearch(data, search_params):
     # Best Model
     print("Best Model's Params: ", model.best_params_)
     best_lda_model = model.best_estimator_
+    return best_lda_model
+
 
 def getLDATopWords(lda, feature_names, n_top):
     topic_list = []
@@ -142,8 +157,9 @@ def getLDATopWords(lda, feature_names, n_top):
         topic_list.append([topic_idx, top_words])
     return topic_list
 
+
 def visDocTopicDist(doctopic):
-    #N documents, K topics
+    # N documents, K topics
     N, K = doctopic.shape
     ind = np.arange(N)
     width = 0.5
@@ -157,25 +173,28 @@ def visDocTopicDist(doctopic):
             p = plt.bar(ind, doctopic[:, k], width, bottom=height_cumulative, color=color)
         height_cumulative += doctopic[:, k]
         plots.append(p)
-    plt.ylim(0,1)
+    plt.ylim(0, 1)
     plt.ylabel('Topics')
     plt.title('Topics in docs')
     plt.xticks(ind+width/2, [n for n in range(N)])
-    plt.yticks(np.arange(0,1,10))
+    plt.yticks(np.arange(0, 1, 10))
     topic_labels=['Topic #{}'.format(k) for k in range(K)]
     plt.legend([p[0] for p in plots], topic_labels)
     plt.show()
 
+
 def visLDAIPython(model, data, vectorizer, ip, port):
     pyLDAvis.enable_notebook()
-    #https://github.com/bmabey/pyLDAvis/issues/69
+    # https://github.com/bmabey/pyLDAvis/issues/69
     visData = pyLDAvis.sklearn.prepare(model, data, vectorizer, mds='mmds', sort_topics=False)
     pyLDAvis.show(visData,  ip=ip, port=port)
 
+
 def visLDA(model, data, vectorizer, ip, port):
-    #https://github.com/bmabey/pyLDAvis/issues/69
+    # https://github.com/bmabey/pyLDAvis/issues/69
     visData = pyLDAvis.sklearn.prepare(model, data, vectorizer, mds='mmds', sort_topics=False)
     pyLDAvis.show(visData,  ip=ip, port=port)
+
 
 def parseParameters():
     parser = argparse.ArgumentParser()
@@ -205,6 +224,7 @@ def parseParameters():
     )
 
     return parser.parse_known_args()
+
 
 if __name__ == "__main__":
     FLAGS, unparsed = parseParameters()
@@ -240,11 +260,11 @@ if __name__ == "__main__":
     tokenized_data, vectorized_data, vectorizer = vectorizer_tf.fit_transform(data)
     print(tokenized_data[:10])
     del tokenized_data
-    #print(vectorized_data[:10])
+    # print(vectorized_data[:10])
 
     start_time = time.time()
     n_topics = 50
-    #lda = trainLDA(vectorized_data, n_topics, max_iterations)
+    # lda = trainLDA(vectorized_data, n_topics, max_iterations)
     search_params = {'n_components': [n_topics], 'learning_decay': [.7, .8, .9], 'max_iter': [100, 200]}
     lda = trainLDAGridSearch(vectorized_data, search_params)
     try:
@@ -262,9 +282,9 @@ if __name__ == "__main__":
           .format(end_time - start_time, train_perplexity))
 
     # get document_topic_distribution
-    #visDocTopicDist(train_gamma[:10])
-    #print(train_gamma.shape)
-    #print(train_gamma[0])
+    # visDocTopicDist(train_gamma[:10])
+    # print(train_gamma.shape)
+    # print(train_gamma[0])
 
     # save result to csv
     df_topics = pd.DataFrame(topic_list, columns=["topic_index", "topic_words"])
