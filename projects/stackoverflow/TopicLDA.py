@@ -32,6 +32,9 @@ plt.rcParams["figure.figsize"] = [16,9]
 warnings.filterwarnings(action='once')
 warnings.filterwarnings('ignore')
 
+# moved downloaded nltk_data
+# from C:\Users\admin\AppData\Roaming\nltk_data to D:\Program_Files\Anaconda3\Lib\site-packages\nltk\nltk_data
+nltk.data.path.append(r"D:\Program_Files\Anaconda3\Lib\site-packages\nltk\nltk_data")
 
 def cleanTextFunc(text):
     # some data will raise NotImplementedError: subclasses of ParserBase must override error()
@@ -132,12 +135,12 @@ def trainLDAGridSearch(data, search_params):
     # Init the Model
     lda = LatentDirichletAllocation()
     # Init Grid Search Class
-    model = GridSearchCV(lda, param_grid=search_params)
+    model = GridSearchCV(lda, param_grid=search_params, n_jobs=4)
     # Do the Grid Search
     model.fit(data)
 
     # Best Model
-    Tools.flushPrint("Best Model's Params: ", model.best_params_)
+    Tools.flushPrint("Best Model's Params:{} ".format(model.best_params_))
     best_lda_model = model.best_estimator_
     return best_lda_model
 
@@ -146,7 +149,7 @@ def getLDATopWords(lda, feature_names, n_top):
     topic_list = []
     for topic_idx, topic in enumerate(lda.components_):
         top_words = " ".join([feature_names[i]
-                              for i in topic.argsort()[:-n_top- 1:-1]])
+                              for i in topic.argsort()[:-n_top - 1:-1]])
         topic_list.append([topic_idx, top_words])
     return topic_list
 
@@ -222,7 +225,7 @@ def parseParameters():
 if __name__ == "__main__":
     FLAGS, unparsed = parseParameters()
     if unparsed:
-        Tools.flushPrint("unparsed parameters: ", unparsed)
+        Tools.flushPrint("unparsed parameters: {}".format(unparsed))
     max_iterations = FLAGS.max_steps
     input_data_dir = FLAGS.input_data_dir
     output_data_dir = FLAGS.output_data_dir
@@ -230,20 +233,23 @@ if __name__ == "__main__":
 
     df = pd.read_csv(os.path.join(FLAGS.input_data_dir, "Posts_{}.csv".format(year)), encoding="utf-8")
     data = df["body"].values
+    Tools.flushPrint(data.shape)
     # heirish test
     # data = data[:100]
 
-    cleaner = TextProcessor.TextProcessTransformer(cleanTextFunc, n_jobs=8, n_chunks=2)
+    cleaner = TextProcessor.TextProcessTransformer(cleanTextFunc, n_jobs=8, n_chunks=20)
     cleaned_data = cleaner.fit_transform(data)
     Tools.flushPrint(cleaned_data[:10])
     del data
 
-    # spacy is slower thatn nltk if the data is large when use on linux. might hang the process
+    # spacy is slower thatn nltk if the data is large when use on linux. might hang the process,
+    # https://github.com/scikit-learn/scikit-learn/issues/5115
+    # https://pythonhosted.org/joblib/parallel.html#bad-interaction-of-multiprocessing-and-third-party-libraries
     # https://github.com/explosion/spaCy/issues/1572
-    # tokenizer = TextProcessor.TextProcessTransformer(tokenFuncSpacy, n_jobs=8, n_chunks=2)
+    # tokenizer = TextProcessor.TextProcessTransformer(tokenFuncSpacy, n_jobs=8, n_chunks=20)
 
     start_time = time.time()
-    tokenizer = TextProcessor.TextProcessTransformer(tokenFuncNltk, n_jobs=8, n_chunks=2)
+    tokenizer = TextProcessor.TextProcessTransformer(tokenFuncNltk, n_jobs=8, n_chunks=20)
     tokenized_data = tokenizer.fit_transform(cleaned_data)
     Tools.flushPrint(tokenized_data[:10])
     del cleaned_data
