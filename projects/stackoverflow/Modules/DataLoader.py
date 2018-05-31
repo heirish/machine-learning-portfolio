@@ -89,6 +89,25 @@ def loadStackoverflowFromXML(XMLFile, maxCount = -1):
     print("Parse XML [%s]Done, total [%d] records!" % (XMLFile, count))
     return pd.DataFrame(data, columns=KEEP_FIELDS)
 
+def getStackoverflowTags(XMLFile):
+    context = ET.iterparse(XMLFile, events=("start", "end"))
+    #turn it into an iterator
+    context = iter(context)
+    #get the root element
+    event, root = next(context)
+    data = []
+    for event, elem in context:
+        if event == "end" and elem.tag == "row":
+            try:
+                for key in elem.attrib.keys():
+                    if key.lower() == FIELDNAME_TAGS:
+                        tags = [x for x in re.split("[<>]", elem.attrib.get(key).strip().lower()) if x]
+                        data.extend(tags)
+            except Exception as e:
+                print(e)
+        root.clear()
+    print("Parse XML [%s]Done, total [%d] tags!" % (XMLFile, len(data)))
+    return data
 
 #######test######
 #df = loadStackoverflowFromXML(r"F:\stackoverflow.com-Posts\Posts.xml", 200)
