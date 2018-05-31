@@ -64,8 +64,8 @@ punctuations = " ".join(string.punctuation).split(" ") + " ".join(hanzi.punctuat
 def tokenFunc(sentence):
     try:
         tokens = parser(sentence)
-        # only keep nouns
-        # tokens = [tok for tok in tokens if (tok.tag_ in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
+        # only keep nouns and adjectives
+        tokens = [tok for tok in tokens if (tok.tag_ in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
         tokens = [tok.lemma_.lower().strip() if tok.lemma_ != "-PRON-" else tok.lower_ for tok in tokens]
         tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations)]
         # remove tokens lenth is 1
@@ -199,8 +199,6 @@ if __name__ == "__main__":
 
     df = pd.read_csv(os.path.join(FLAGS.input_data_dir, "Posts_{}.csv".format(year)), encoding="utf-8")
     data = df["body"].values
-    ###heirish test###
-    data = data[:100]
 
     cleaner = TextProcessor.TextProcessTransformer(cleanTextFunc, n_jobs=2, n_chunks=2)
     cleaned_data = cleaner.fit_transform(data)
