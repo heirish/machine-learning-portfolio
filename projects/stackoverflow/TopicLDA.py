@@ -134,8 +134,11 @@ def trainLDA(data, n_topics, max_iterations):
 def trainLDAGridSearch(data, search_params):
     # Init the Model
     lda = LatentDirichletAllocation()
+
     # Init Grid Search Class
-    model = GridSearchCV(lda, param_grid=search_params, n_jobs=4)
+    # https://github.com/scikit-learn/scikit-learn/issues/9619
+    # set return_train_score can speed up the search
+    model = GridSearchCV(lda, param_grid=search_params, n_jobs=8, return_train_score=False)
     # Do the Grid Search
     model.fit(data)
 
@@ -235,7 +238,7 @@ if __name__ == "__main__":
     data = df["body"].values
     Tools.flushPrint(data.shape)
     # heirish test
-    # data = data[:100]
+    data = data[:1000]
 
     cleaner = TextProcessor.TextProcessTransformer(cleanTextFunc, n_jobs=8, n_chunks=20)
     cleaned_data = cleaner.fit_transform(data)
