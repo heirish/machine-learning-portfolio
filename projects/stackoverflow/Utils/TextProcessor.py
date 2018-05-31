@@ -1,17 +1,13 @@
+import re
 import string
-import spacy
 import math
 import multiprocessing
+from zhon import hanzi
 from sklearn.base import TransformerMixin
-from sklearn.feature_extraction.stop_words import ENGLISH_STOP_WORDS as stopwords
-
-############create tokenizer
-punctuations = " ".join(string.punctuation).split(" ")
-parser = spacy.load('en', disable=['parser', 'ner'])
 
 
 # A custom function to clean the text before sending it into the vectorizer
-def defaultClean(self, text):
+def defaultClean(text):
     text = text.lower()
     # get rid of newlines
     text = text.strip().replace("\n", " ").replace("\r", " ")
@@ -23,10 +19,21 @@ def defaultClean(self, text):
 # Create spacy tokenizer that parses a sentence and generates tokens
 # these can also be replaced by word vectors
 # List of symbols we don't care about
-def defaultTokenFunc(self, sentence):
-    tokens = parser(sentence)
-    tokens = [tok.lemma_.lower().strip() if tok.lemma_ != "-PRON-" else tok.lower_ for tok in tokens]
-    tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations)]
+def defaultTokenFunc(text):
+    # split text
+    try:
+        # english words might contain -_
+        # |||| is quote to | in sub
+        # keep * in pattern
+        delimiter = string.punctuation.replace('_', "").replace("-", "").replace("*", "") + "\\\\"
+        # add hanzi punctuations
+        delimiter += hanzi.punctuation
+        # add space
+        tokens = re.split("([{}])".format(delimiter + ' '), text)
+    except Exception as e:
+        pass
+        tokens = []
+    tokens = [tok.lower() for tok in tokens if tok]
     return tokens
 
 

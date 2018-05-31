@@ -10,6 +10,7 @@ import pyLDAvis.sklearn
 import argparse
 import spacy
 import warnings
+import nltk
 import pandas as pd
 import numpy as np
 from zhon import hanzi
@@ -60,16 +61,17 @@ parser = spacy.load('en', disable=['parser', 'ner'])
 punctuations = " ".join(string.punctuation).split(" ") + " ".join(hanzi.punctuation).split(" ")
 # only keep nouns and adjectives
 
-
-def tokenFunc(sentence):
+# spacy will hang in pool.map when use on linux.
+# https://github.com/explosion/spaCy/issues/1572
+def tokenFuncSpacy(text):
     try:
-        tokens = parser(sentence)
+        tokens = parser(text)
         # only keep nouns and adjectives
         tokens = [tok for tok in tokens if (tok.tag_ in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
         tokens = [tok.lemma_.lower().strip() if tok.lemma_ != "-PRON-" else tok.lower_ for tok in tokens]
         tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations)]
         # remove tokens lenth is 1
-        tokens = [tok for tok in tokens if (len(tok)>1)]
+        tokens = [tok for tok in tokens if (len(tok) > 1)]
         # remove large strings of whitespace
         while "" in tokens:
             tokens.remove("")
@@ -81,9 +83,38 @@ def tokenFunc(sentence):
             tokens.remove("\n\n")
     except Exception as e:
         print(e)
-        print(sentence)
-        tokens=[]
+        print(nltk)
+        tokens = []
     return tokens
+
+
+# pip install nltk
+# import nltk
+# nltk.download("all")
+def tokenFuncNltk(text):
+    try:
+        tokens = nltk.word_tokenize(text)
+        tags = nltk.pos_tag(tokens)
+        tokens = [word for word, pos in tags if (pos in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
+        tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations)]
+        # remove tokens lenth is 1
+        tokens = [tok for tok in tokens if (len(tok) > 1)]
+        # remove large strings of whitespace
+        while "" in tokens:
+            tokens.remove("")
+        while " " in tokens:
+            tokens.remove(" ")
+        while "\n" in tokens:
+            tokens.remove("\n")
+        while "\n\n" in tokens:
+            tokens.remove("\n\n")
+    except Exception as e:
+        print(e)
+        print(nltk)
+        tokens = []
+
+    return tokens
+
 
 def trainLDA(data, n_topics, max_iterations):
     lda = LatentDirichletAllocation(n_components=n_topics,
@@ -199,13 +230,19 @@ if __name__ == "__main__":
 
     df = pd.read_csv(os.path.join(FLAGS.input_data_dir, "Posts_{}.csv".format(year)), encoding="utf-8")
     data = df["body"].values
+    # heirish test
+    # data = data[:100]
 
     cleaner = TextProcessor.TextProcessTransformer(cleanTextFunc, n_jobs=2, n_chunks=2)
     cleaned_data = cleaner.fit_transform(data)
     print(cleaned_data[:10])
     del data
 
-    tokenizer = TextProcessor.TextProcessTransformer(tokenFunc, n_jobs=2, n_chunks=2)
+    # spacy will hang if the data is large when use on linux.
+    # https://github.com/explosion/spaCy/issues/1572
+    # tokenizer = TextProcessor.TextProcessTransformer(tokenFuncSpacy, n_jobs=2, n_chunks=2)
+
+    tokenizer = TextProcessor.TextProcessTransformer(tokenFuncNltk, n_jobs=2, n_chunks=2)
     tokenized_data = tokenizer.fit_transform(cleaned_data)
     print(tokenized_data[:10])
     del cleaned_data
@@ -228,8 +265,9 @@ if __name__ == "__main__":
     start_time = time.time()
     n_topics = 50
     # lda = trainLDA(vectorized_data, n_topics, max_iterations)
-    search_params = {'n_components': [n_topics], 'learning_decay': [.7, .8, .9], 'max_iter': [100, 200]}
+    search_params = {'n_components': [n_topics], 'learning_decay': [.7, .9], 'max_iter': [100, 200]}
     lda = trainLDAGridSearch(vectorized_data, search_params)
+    print(lda)
     try:
         Tools.dillDump(os.path.join(output_data_dir, "lda_{}.pkl".format(year)), lda)
     except:
