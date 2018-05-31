@@ -4,14 +4,12 @@
 import re
 import os
 import time
-import math
 import string
 import pyLDAvis
 import pyLDAvis.sklearn
 import argparse
 import spacy
 import warnings
-import multiprocessing
 import pandas as pd
 import numpy as np
 from zhon import hanzi
@@ -22,10 +20,9 @@ from sklearn.feature_extraction.stop_words import ENGLISH_STOP_WORDS as stopword
 from sklearn.feature_extraction.text import CountVectorizer
 
 
-from Utils import TextCleaner, TextVectorizer, Tools
+from Utils import TextProcessor, Tools
 import importlib
-importlib.reload(TextCleaner)
-importlib.reload(TextVectorizer)
+importlib.reload(TextProcessor)
 importlib.reload(Tools)
 
 import matplotlib.pyplot as plt
@@ -87,41 +84,6 @@ def tokenFunc(sentence):
         print(sentence)
         tokens=[]
     return tokens
-
-
-def tokenInChunks(data_in, n_jobs=1, n_chunks=1):
-    # split data_in into n_chunks parts
-    # for multiprocessing 'i' format requires -2147483648 <= number <= 2147483647
-    chunk_size = int(math.ceil(len(data_in) / n_chunks))
-    tokenized_data = []
-    start_time = time.time()
-    if n_jobs>1:
-        pool = multiprocessing.Pool(n_jobs)
-        for i in range(n_chunks):
-            tokenized_data_tmp = pool.map(tokenFunc, data_in[chunk_size*i:chunk_size*(i+1)])
-            end_time = time.time()
-            print("tokenized {} records in {} seconds".format(chunk_size*(i+1), end_time - start_time))
-            tokenized_data.extend(tokenized_data_tmp)
-#            try:
-#                utilTools.pickleDump(DATAFILE_TOKENIZED+str(i), tokenized_data_tmp)
-#            except Exception as e:
-#                print(e)
-#                print("pickleDump tokenized data Failed")
-        pool.close()
-        pool.join()
-    else:
-        for i in range(n_chunks):
-            tokenized_data_tmp = [tokenFunc(x) for x in data_in[chunk_size*i:chunk_size*(i+1)]]
-            end_time = time.time()
-            print("tokenized {} records in {} seconds".format(chunk_size*(i+1), end_time - start_time))
-            tokenized_data.extend(tokenized_data_tmp)
-#            try:
-#                utilTools.pickleDump(DATAFILE_TOKENIZED+str(i), tokenized_data_tmp)
-#            except Exception as e:
-#                print(e)
-#                print("pickleDump tokenized data Failed")
-    return tokenized_data
-
 
 def trainLDA(data, n_topics, max_iterations):
     lda = LatentDirichletAllocation(n_components=n_topics,
@@ -237,10 +199,18 @@ if __name__ == "__main__":
 
     df = pd.read_csv(os.path.join(FLAGS.input_data_dir, "Posts_{}.csv".format(year)), encoding="utf-8")
     data = df["body"].values
+    ###heirish test###
+    data = data[:100]
 
-    cleaner = TextCleaner.CleanTextTransformer(n_jobs=2, cleanFunc=cleanTextFunc)
-    data = cleaner.fit_transform(data)
-    print(data[:10])
+    cleaner = TextProcessor.TextProcessTransformer(cleanTextFunc, n_jobs=2, n_chunks=2)
+    cleaned_data = cleaner.fit_transform(data)
+    print(cleaned_data[:10])
+    del data
+
+    tokenizer = TextProcessor.TextProcessTransformer(tokenFunc, n_jobs=2, n_chunks=2)
+    tokenized_data = tokenizer.fit_transform(cleaned_data)
+    print(tokenized_data[:10])
+    del cleaned_data
 
     vectorizer = CountVectorizer(
         # so we can pass it strings
@@ -253,14 +223,9 @@ if __name__ == "__main__":
         min_df=3,
         max_df=0.8,
         max_features=20000)
-    vectorizer_tf = TextVectorizer.VectorizationTransformer(n_token_jobs=2,
-                                                            n_token_chunks=1,
-                                                            tokenFunc=tokenInChunks,
-                                                            vectorizer=vectorizer)
-    tokenized_data, vectorized_data, vectorizer = vectorizer_tf.fit_transform(data)
-    print(tokenized_data[:10])
-    del tokenized_data
+    vectorized_data = vectorizer.fit_transform(tokenized_data)
     # print(vectorized_data[:10])
+    del tokenized_data
 
     start_time = time.time()
     n_topics = 50
