@@ -6,6 +6,7 @@ from zhon import hanzi
 from sklearn.base import TransformerMixin
 
 
+
 # A custom function to clean the text before sending it into the vectorizer
 def defaultClean(text):
     text = text.lower()

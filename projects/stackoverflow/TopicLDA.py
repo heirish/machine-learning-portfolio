@@ -41,7 +41,7 @@ def cleanTextFunc(text):
         # replace other HTML symbols
         text = bs.get_text()
     except Exception as e:
-        #print(e)
+        # Tools.flushPrint(e)
         pass
     text = text.lower()
     # get rid of newlines
@@ -61,7 +61,7 @@ parser = spacy.load('en', disable=['parser', 'ner'])
 punctuations = " ".join(string.punctuation).split(" ") + " ".join(hanzi.punctuation).split(" ")
 # only keep nouns and adjectives
 
-# spacy will hang in pool.map when use on linux.
+# spacy is slower thatn nltk if the data is large when use on linux. might hang the process
 # https://github.com/explosion/spaCy/issues/1572
 def tokenFuncSpacy(text):
     try:
@@ -82,8 +82,8 @@ def tokenFuncSpacy(text):
         while "\n\n" in tokens:
             tokens.remove("\n\n")
     except Exception as e:
-        print(e)
-        print(nltk)
+        Tools.flushPrint(e)
+        Tools.flushPrint(text)
         tokens = []
     return tokens
 
@@ -109,8 +109,8 @@ def tokenFuncNltk(text):
         while "\n\n" in tokens:
             tokens.remove("\n\n")
     except Exception as e:
-        print(e)
-        print(nltk)
+        Tools.flushPrint(e)
+        Tools.flushPrint(text)
         tokens = []
 
     return tokens
@@ -137,7 +137,7 @@ def trainLDAGridSearch(data, search_params):
     model.fit(data)
 
     # Best Model
-    print("Best Model's Params: ", model.best_params_)
+    Tools.flushPrint("Best Model's Params: ", model.best_params_)
     best_lda_model = model.best_estimator_
     return best_lda_model
 
@@ -222,7 +222,7 @@ def parseParameters():
 if __name__ == "__main__":
     FLAGS, unparsed = parseParameters()
     if unparsed:
-        print("unparsed parameters: ", unparsed)
+        Tools.flushPrint("unparsed parameters: ", unparsed)
     max_iterations = FLAGS.max_steps
     input_data_dir = FLAGS.input_data_dir
     output_data_dir = FLAGS.output_data_dir
@@ -233,20 +233,24 @@ if __name__ == "__main__":
     # heirish test
     # data = data[:100]
 
-    cleaner = TextProcessor.TextProcessTransformer(cleanTextFunc, n_jobs=2, n_chunks=2)
+    cleaner = TextProcessor.TextProcessTransformer(cleanTextFunc, n_jobs=8, n_chunks=2)
     cleaned_data = cleaner.fit_transform(data)
-    print(cleaned_data[:10])
+    Tools.flushPrint(cleaned_data[:10])
     del data
 
-    # spacy will hang if the data is large when use on linux.
+    # spacy is slower thatn nltk if the data is large when use on linux. might hang the process
     # https://github.com/explosion/spaCy/issues/1572
-    # tokenizer = TextProcessor.TextProcessTransformer(tokenFuncSpacy, n_jobs=2, n_chunks=2)
+    # tokenizer = TextProcessor.TextProcessTransformer(tokenFuncSpacy, n_jobs=8, n_chunks=2)
 
-    tokenizer = TextProcessor.TextProcessTransformer(tokenFuncNltk, n_jobs=2, n_chunks=2)
+    start_time = time.time()
+    tokenizer = TextProcessor.TextProcessTransformer(tokenFuncNltk, n_jobs=8, n_chunks=2)
     tokenized_data = tokenizer.fit_transform(cleaned_data)
-    print(tokenized_data[:10])
+    Tools.flushPrint(tokenized_data[:10])
     del cleaned_data
+    end_time = time.time()
+    Tools.flushPrint("tokenized in {} seconds".format(end_time - start_time))
 
+    start_time = time.time()
     vectorizer = CountVectorizer(
         # so we can pass it strings
         input='content',
@@ -259,15 +263,17 @@ if __name__ == "__main__":
         max_df=0.8,
         max_features=20000)
     vectorized_data = vectorizer.fit_transform(tokenized_data)
-    # print(vectorized_data[:10])
+    # Tools.flushPrint(vectorized_data[:10])
     del tokenized_data
+    end_time = time.time()
+    Tools.flushPrint("vectorized in {} seconds".format(end_time - start_time))
 
     start_time = time.time()
     n_topics = 50
     # lda = trainLDA(vectorized_data, n_topics, max_iterations)
     search_params = {'n_components': [n_topics], 'learning_decay': [.7, .9], 'max_iter': [100, 200]}
     lda = trainLDAGridSearch(vectorized_data, search_params)
-    print(lda)
+    Tools.flushPrint(lda)
     try:
         Tools.dillDump(os.path.join(output_data_dir, "lda_{}.pkl".format(year)), lda)
     except:
@@ -276,16 +282,16 @@ if __name__ == "__main__":
     feature_names = vectorizer.get_feature_names()
     topic_list = getLDATopWords(lda, feature_names, 20)
     train_gamma = lda.transform(vectorized_data)
-    print("train_gamma:{}".format(train_gamma.shape))
+    Tools.flushPrint("train_gamma:{}".format(train_gamma.shape))
     train_perplexity = lda.perplexity(vectorized_data)
     end_time = time.time()
-    print("Trained LDA in {} Seconds, preplexity {}\n"
+    Tools.flushPrint("Trained LDA in {} Seconds, preplexity {}\n"
           .format(end_time - start_time, train_perplexity))
 
     # get document_topic_distribution
     # visDocTopicDist(train_gamma[:10])
-    # print(train_gamma.shape)
-    # print(train_gamma[0])
+    # Tools.flushPrint(train_gamma.shape)
+    # Tools.flushPrint(train_gamma[0])
 
     # save result to csv
     df_topics = pd.DataFrame(topic_list, columns=["topic_index", "topic_words"])

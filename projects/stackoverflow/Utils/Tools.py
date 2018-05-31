@@ -1,12 +1,17 @@
 import socket
 import dill
 import pickle
-
+import sys
 
 def getIP():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
     return s.getsockname()[0]
+
+
+def flushPrint(msg):
+    print(msg)
+    sys.stdout.flush()
 
 
 def pickleDump(filename, obj):
