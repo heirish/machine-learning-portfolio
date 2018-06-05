@@ -1,0 +1,6 @@
+- Steps:
+  - Filter tags: run OtherLDATopic.py / getAllTags.py --->exclude_tags_id.csv
+  - Filter Title: run OtherLDATopic.py / filterTitle.py --->exclude_titles_id.csv
+  - split data in years: run SplitInYear.py --->Topics_year.csv
+  - TopicLDA for every year: run TopicLDA.py  (first training on questions content, exclude the code tag)
+  - refilter training data: run filterByTopic.py, then loop back to the last step
