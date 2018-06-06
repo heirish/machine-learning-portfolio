@@ -63,16 +63,18 @@ def cleanTextFunc(text):
 
 parser = spacy.load('en', disable=['parser', 'ner'])
 punctuations = " ".join(string.punctuation).split(" ") + " ".join(hanzi.punctuation).split(" ")
-EXCLUDE_WORDS = ["thank"]
-# only keep nouns and adjectives
+EXCLUDE_WORDS = ["thank", "thanks", "..", "'ve", "'s", "'m"]
+
 
 # spacy is slower thatn nltk if the data is large when use on linux. might hang the process
 # https://github.com/explosion/spaCy/issues/1572
 def tokenFuncSpacy(text):
     try:
         tokens = parser(text)
-        # only keep nouns and adjectives
-        tokens = [tok for tok in tokens if (tok.tag_ in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
+        # only keep nouns and adjectives, mostly for semantic analysis, like review of movie or product
+        # tokens = [tok for tok in tokens if (tok.tag_ in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
+        # only keep nouns and verb,
+        tokens = [tok for tok in tokens if (tok.tag_ in ("NN", "NNS", "NNP", "NNPS", "MD", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ"))]
         tokens = [tok.lemma_.lower().strip() if tok.lemma_ != "-PRON-" else tok.lower_ for tok in tokens]
         tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations and tok not in EXCLUDE_WORDS)]
         # remove tokens lenth is 1
@@ -100,8 +102,11 @@ def tokenFuncNltk(text):
     try:
         tokens = nltk.word_tokenize(text)
         tags = nltk.pos_tag(tokens)
-        tokens = [word for word, pos in tags if (pos in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
-        tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations)]
+        # only keep nouns and adjectives, mostly for semantic analysis, like review of movie or product
+        # tokens = [word for word, pos in tags if (pos in ("NN", "NNS", "NNP", "NNPS", "JJ"))]
+        # only keep nouns and verb,
+        tokens = [word for word, pos in tags if (pos in ("NN", "NNS", "NNP", "NNPS", "MD", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ"))]
+        tokens = [tok for tok in tokens if (tok not in stopwords and tok not in punctuations and tok not in EXCLUDE_WORDS)]
         # remove tokens lenth is 1
         tokens = [tok for tok in tokens if (len(tok) > 1)]
         # remove large strings of whitespace
@@ -243,7 +248,15 @@ if __name__ == "__main__":
     year = FLAGS.year
     n_topics = FLAGS.topics
 
-    df = pd.read_csv(os.path.join(FLAGS.input_data_dir, "Posts_{}.csv".format(year)), encoding="utf-8")
+    df_total = pd.read_csv(os.path.join(FLAGS.input_data_dir, "Posts_{}.csv".format(year)), encoding="utf-8")
+    deleted_docID_file = os.path.join(FLAGS.input_data_dir, "deleted_docID_{}.csv".format(year))
+    if os.path.isfile(deleted_docID_file):
+        df_already_deleted = pd.read_csv(deleted_docID_file, encoding="utf-8")
+        df = df_total[~(df_total["docID"].isin(df_already_deleted["docID"]))]
+        print("have {} records, deleted {} records".format(df_total.shape[0], df.shape[0]))
+    else:
+        df = df_total
+    del df_total
     data = df["body"].values
     Tools.flushPrint(data.shape)
     # heirish test

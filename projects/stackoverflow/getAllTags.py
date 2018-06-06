@@ -31,7 +31,7 @@ def printList(x):
 
 # df_tags_nodup = pd.read_csv("Data_in/tags_nodup.csv")
 # df_tags_ex = pd.read_csv("Data_in/exclude_tags.csv")
-# df_tags_left = df_tags_nodup[~df_tags_nodup["tag"].isin(df_tags_ex["tag"])]
+# df_tags_left = df_tags_nodup[(~df_tags_nodup["tag"].isin(df_tags_ex["tag"]))]
 # print(df_tags_left.head(5))
 # printList(df_tags_left.loc[df_tags_left["tag"].str.contains("visual-studio"), "tag"].values)
 # printList(df_tags_left.loc[df_tags_left["tag"].str.startswith("c++builder"), "tag"].values)

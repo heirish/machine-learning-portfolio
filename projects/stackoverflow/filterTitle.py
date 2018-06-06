@@ -56,5 +56,5 @@ df_exclude = df_exclude.append(df_compare, ignore_index=True)
 df_exclude = df_exclude.append(df_possible, ignore_index=True)
 df_exclude = df_exclude.drop_duplicates(["title"])
 df_exclude.to_csv("Data_in/exclude_titles_id.csv", sep=',', encoding="utf-8", index=False)
-df_left = df[~df["docID"].isin(df_exclude["docID"])]
+df_left = df[(~df["docID"].isin(df_exclude["docID"]))]
 df_left.to_csv("Data_in/titles_left.csv", sep=',', encoding="utf-8", index=False)
