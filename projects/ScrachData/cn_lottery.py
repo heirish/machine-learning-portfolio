@@ -7,25 +7,25 @@ from bs4 import BeautifulSoup
 url = 'http://kaijiang.zhcw.com/zhcw/html/ssq/list_{page}.html'
 total_page = 151
 cols = ['open_date', 'serial_no',
-           'bonus_no0', 'bonus_no1',
-           'bonus_no2', 'bonus_no3',
-           'bonus_no4', 'bonus_no5',
-           'bonus_no6']
+        'bonus_no0', 'bonus_no1',
+        'bonus_no2', 'bonus_no3',
+        'bonus_no4', 'bonus_no5',
+        'bonus_no6']
 
 data = []
-# å®šä¹‰åŒºåˆ—è¡¨
+# ¶¨ÒåÇøÁÐ±í
 for j in range(0, total_page+1):
     if j == 0:
-        lottory_url= 'http://kaijiang.zhcw.com/zhcw/html/ssq/list.html'
+        lottery_url = 'http://kaijiang.zhcw.com/zhcw/html/ssq/list.html'
     else:
-        lottory_url= url.format(page=j)
+        lottery_url = url.format(page=j)
 
-    print("downloading page: " + lottory_url)
+    print("downloading page: " + lottery_url)
     try:
-        res = requests.get(lottory_url, verify=False)
+        res = requests.get(lottery_url, verify=False)
         res.encoding = 'utf-8'
         soup = BeautifulSoup(res.text, 'html.parser')
-        table = soup.find('table', {"class" : "wqhgt"})
+        table = soup.find('table', {"class": "wqhgt"})
         content = table.find_all('tr')
     except Exception as e:
         print(e)
@@ -36,7 +36,7 @@ for j in range(0, total_page+1):
     for element in content:
         datum = {}
         try:
-            cells= element.find_all('td')
+            cells = element.find_all('td')
             if len(cells) != 7:
                 continue
             # only need the first 3 tds
@@ -56,4 +56,4 @@ for j in range(0, total_page+1):
 df = pd.DataFrame(data)
 print(data)
 df.head()
-df.to_csv('./data_out/lottory.csv', index = False, columns = cols)
+df.to_csv('./data_out/lottery.csv', index=False, columns=cols)
