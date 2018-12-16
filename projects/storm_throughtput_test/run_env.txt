@@ -1,0 +1,27 @@
+git clone https://github.com/31z4/storm-docker.git
+cd storm-docker/1.1.3
+build -t storm-test:1.1.3 ./
+docker run -d --restart always --name some-zookeeper zookeeper
+docker run -d --restart always --name some-nimbus --link some-zookeeper:zookeeper storm-test:1.1.3 storm nimbus
+docker run -d -p 8080:8080 --restart always --name ui --link some-nimbus:nimbus storm-test:1.1.3 storm ui
+docker run -d --restart always --name supervisor --link some-zookeeper:zookeeper --link some-nimbus:nimbus storm-test:1.1.3 storm supervisor
+docker run --link some-nimbus:nimbus -it --rm -v $(pwd)/topology.jar:/topology.jar storm-test:1.1.3 storm jar /topology.jar udacity.storm.ExclamationTopology topology
+
+docker pull registry.cn-hangzhou.aliyuncs.com/down/repository:1.1.3
+docker run -d --restart always --name some-zookeeper zookeeper
+docker run -d --restart always --name some-nimbus --link some-zookeeper:zookeeper registry.cn-hangzhou.aliyuncs.com/down/repository:1.1.3 storm nimbus
+docker run -d -p 8080:8080 --restart always --name ui --link some-nimbus:nimbus registry.cn-hangzhou.aliyuncs.com/down/repository:1.1.3 storm ui
+docker run -d --restart always --name supervisor --link some-zookeeper:zookeeper --link some-nimbus:nimbus registry.cn-hangzhou.aliyuncs.com/down/repository:1.1.3 storm supervisor
+docker run --link some-nimbus:nimbus -it --rm -v $(pwd)/topology.jar:/topology.jar registry.cn-hangzhou.aliyuncs.com/down/repository:1.1.3 storm jar /topology.jar udacity.storm.ExclamationTopology topology
+
+
+http://192.168.99.100:8080/api/v1/topology/topology-1-1544863910?window=600
+http://storm.apache.org/releases/1.1.2/STORM-UI-REST-API.html
+https://github.com/DataDog/integrations-extras/tree/master/storm
+
+sudo docker login --username=heirish32 registry.cn-hangzhou.aliyuncs.com
+sudo docker images
+sudo docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/down/repository:1.1.3
+docker push registry.cn-hangzhou.aliyuncs.com/down/repository:1.1.3
+
+https://www.jianshu.com/p/571383da7adf
