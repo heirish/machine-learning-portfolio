@@ -11,7 +11,7 @@ blue_ball_list = range(1, 33)
 red_ball_list = range(1, 16)
 
 
-# 无重复，用于测试
+# 鏃犻噸澶嶏紝鐢ㄤ簬娴嬭瘯
 def random_generate():
     numbers = sorted(random.sample(blue_ball_list, 6))
     red_number = random.sample(red_ball_list, 1)
@@ -21,7 +21,7 @@ def random_generate():
     return numbers
 
 
-# 有重复，用于训练
+# 鏈夐噸澶嶏紝鐢ㄤ簬璁粌
 def get_all_possible():
     blue_combinations = itertools.combinations(blue_ball_list, 6)
     df = pd.DataFrame(columns=["number", "blue_ball"])

@@ -13,7 +13,7 @@ cols = ['open_date', 'serial_no',
         'bonus_no6']
 
 data = []
-# ¶¨ÒåÇøÁĞ±í
+# å®šä¹‰åŒºåˆ—è¡¨
 for j in range(0, total_page+1):
     if j == 0:
         lottery_url = 'http://kaijiang.zhcw.com/zhcw/html/ssq/list.html'
